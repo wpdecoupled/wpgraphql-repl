@@ -10,9 +10,9 @@
 	// export let data: PageData;
 
 	// console.log('data', data)
-	$: console.log('phpVersion', $phpVersion);
-	$: console.log('wpVersion', $wpVersion);
-	$: console.log('wpUrl', $wpUrl);
+	// $: console.log('phpVersion', $phpVersion);
+	// $: console.log('wpVersion', $wpVersion);
+	// $: console.log('wpUrl', $wpUrl);
 
 	let isDark = false;
 	let opened = true;
@@ -23,6 +23,8 @@
 	function toggleOpened() {
 		opened = !opened;
 	}
+
+	$: wpKey = `${$wpVersion}-${$phpVersion}`;
 </script>
 
 <AppShell navbarOffsetBreakpoint="sm" asideOffsetBreakpoint="sm" padding="0">
@@ -54,7 +56,9 @@
 		/>
 	</Aside>
 
-	<WpPlayground />
+	{#key wpKey}
+		<WpPlayground />
+	{/key}
 
 	<Footer slot="footer" height="50">
 		<p>Copyright © 2023 - AVLIT, LLC. All Rights Reserved.</p>

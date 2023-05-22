@@ -8,16 +8,19 @@
 
 	let wppFrame: HTMLIFrameElement;
 
+	$: blueprint = makeWpGraphQLBlueprint({
+		landingPage: $wpUrl,
+		preferredVersions: {
+			wp: $wpVersion,
+			php: $phpVersion,
+		},
+	});
 
-
-	$: onMount(async () => {
+	onMount(async () => {
 		const client: PlaygroundClient = await startPlaygroundWeb({
 			iframe: wppFrame,
 			remoteUrl: WP_PLAYGROUND_REMOTE_API,
-			blueprint: makeWpGraphQLBlueprint({
-				landingPage: $wpUrl,
-				preferredVersions: { php: $phpVersion, wp: $wpVersion },
-			}),
+			blueprint,
 		});
 
 		await client.isReady();
@@ -25,7 +28,6 @@
 		playgroundClient.set(client);
 
 		client.onNavigation((url: string) => {
-			console.log('onNavigation', url);
 			wpUrl.set(url);
 		});
 	});

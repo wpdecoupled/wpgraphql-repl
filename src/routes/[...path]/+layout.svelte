@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { SvelteUIProvider, TypographyProvider, Seo } from '@svelteuidev/core';
-	import { wpUrl } from '$lib/wordpress-playground';
 	import { browser } from '$app/environment';
 
+	import { SvelteUIProvider, TypographyProvider, Seo } from '@svelteuidev/core';
+	import { replState, wpUrl } from '$lib/wordpress-playground';
+
 	$: if (browser) {
-		history.pushState({}, '', $wpUrl	);
+		history.pushState({}, '', $replState);
 	}
 
 </script>
