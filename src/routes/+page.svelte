@@ -1,44 +1,53 @@
 <script lang="ts">
-	// import BrowserFrame from './BrowserFrame.svelte';
-	import GraphiQL, { wpPlugin } from '$lib/graphiql';
-	import { wpPlaygroundClientStore } from '$lib/stores';
+	import { wpPluginConfigStore } from '$lib/stores';
 	import WpPlayground from '$lib/wordpress-playground';
+	import { fns, AppShell, Aside, Header, Title, Footer } from '@svelteuidev/core';
 
-	$: url = $wpPlaygroundClientStore?.getCurrentURL();
+	let isDark = false;
+	let opened = true;
+
+	function toggleTheme() {
+		isDark = !isDark;
+	}
+	function toggleOpened() {
+		opened = !opened;
+	}
 </script>
 
-<main>
-	<!-- <section>
-		{#if !$wpPlaygroundClientStore}
-			<p>Starting up WP</p>
-		{:else}
-			<GraphiQL
-				config={{
-					plugins: [wpPlugin],
-				}}
-			/>
-		{/if}
-	</section> -->
-	<section>
-		<!-- <BrowserFrame {url}> -->
-			<WpPlayground />
-		<!-- </BrowserFrame> -->
-	</section>
-</main>
+<AppShell
+	navbarOffsetBreakpoint="sm"
+	asideOffsetBreakpoint="sm"
+	padding=0
+
+	>
+	<Header slot="header" height=44>
+		<Title order={1}>WP GraphQL REPL <span id="beta-tag">Beta</span></Title>
+	</Header>
+	<Aside
+		slot="navbar"
+		width={{
+			sm: 'fit-content',
+		}}
+		hidden={!opened}
+	>
+		<p>Some config here</p>
+		<p>Current URL: {$wpPluginConfigStore.url}</p>
+	</Aside>
+
+	<WpPlayground />
+
+	<Footer slot="footer" height=50>
+		<p>Copyright © 2023 - AVLIT, LLC. All Rights Reserved.</p>
+	</Footer>
+</AppShell>
 
 <style>
-	main {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: center;
-		/* padding: 2rem; */
-		height: 100vh;
-
-	}
-
-	section {
-		width: 100%;
-		height: 100%;
+	#beta-tag {
+		font-size: 0.5em;
+		text-transform: uppercase;
+		padding: 0.4em;
+		border: 1px solid blue;
+		border-radius: 1em;
+		/* color: blue; */
 	}
 </style>

@@ -16,6 +16,8 @@
  * gutenberg-pr											Loads the specified Gutenberg Pull Request
  */
 
+import { writable, type Writable } from 'svelte/store';
+
 const WP_PLAYGROUND_API_URL = 'https://playground.wordpress.net/';
 
 type WPPlaygroundOptions = {
@@ -43,4 +45,39 @@ type WPPlaygroundPhpVersion =
 type WPPlaygroundWpVersion = '5.9' | '6.0' | '6.1' | '6.2' | 'latest';
 type WPPlaygroundMode = 'seamless' | 'browser';
 
+export const playgroundOptionsStore: Writable<WPPlaygroundOptions> = writable({
+	php: 'latest',
+	wp: 'latest',
+	plugin: ['wp-graphql'],
+	theme: [],
+	url: '/wp-admin/admin.php?page=graphiql-ide',
+	mode: 'seamless',
+	login: 1,
+});
 
+function getUrlWithOptions(url: string, options: WPPlaygroundOptions): URL {
+	const newUrl = new URL(url);
+	for (const [key, value] of Object.entries(options)) {
+		if (value && !Array.isArray(value)) {
+			newUrl.searchParams.set(key, value.toString());
+		} else if (value && Array.isArray(value)) {
+			value.forEach((item) => {
+				newUrl.searchParams.append(key, item.toString());
+			});
+		}
+	}
+	return newUrl;
+}
+
+export function getWpPlaygroundUrl(options: WPPlaygroundOptions): URL {
+	return getUrlWithOptions(WP_PLAYGROUND_API_URL, options);
+}
+
+export function startPlayground(element: HTMLIFrameElement, options: WPPlaygroundOptions = {}) {
+	// element.addEventListener("load", function() {
+
+	// });
+
+	const url = getWpPlaygroundUrl(options);
+	element.src = url.toString();
+}

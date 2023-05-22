@@ -5,4 +5,5 @@ export const wpPluginConfigStore = writable({
 	url: '',
 });
 
-export const wpPlaygroundClientStore: Writable<PlaygroundClient> | Writable<null> = writable(null);
+// For JS API
+// export const wpPlaygroundClientStore: Writable<PlaygroundClient> | Writable<null> = writable(null);
