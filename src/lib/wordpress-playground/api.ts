@@ -17,67 +17,52 @@
  */
 
 import { writable, type Writable } from 'svelte/store';
+import { useBrowserContext } from '@svelteuidev/composables';
 
-const WP_PLAYGROUND_API_URL = 'https://playground.wordpress.net/';
+import { LatestSupportedPHPVersion } from '@wp-playground/client';
 
-type WPPlaygroundOptions = {
-	php?: WPPlaygroundPhpVersion;
-	wp?: WPPlaygroundWpVersion;
-	plugin?: string[];
-	theme?: string[];
-	url?: string;
-	mode?: WPPlaygroundMode;
-	login?: number;
-	gutenbergPr?: string;
-};
+import type { PlaygroundClient, Blueprint, SupportedPHPVersion, supportedWordPressVersion } from '@wp-playground/client';
 
-type WPPlaygroundPhpVersion =
-	| '5.6'
-	| '7.0'
-	| '7.1'
-	| '7.2'
-	| '7.3'
-	| '7.4'
-	| '8.0'
-	| '8.1'
-	| '8.2'
-	| 'latest';
-type WPPlaygroundWpVersion = '5.9' | '6.0' | '6.1' | '6.2' | 'latest';
-type WPPlaygroundMode = 'seamless' | 'browser';
+export const wpVersion: Writable<supportedWordPressVersion> = writable('6.2');
+export const phpVersion: Writable<SupportedPHPVersion> = writable(LatestSupportedPHPVersion);
 
-export const playgroundOptionsStore: Writable<WPPlaygroundOptions> = writable({
-	php: 'latest',
-	wp: 'latest',
-	plugin: ['wp-graphql'],
-	theme: [],
-	url: '/wp-admin/admin.php?page=graphiql-ide',
-	mode: 'seamless',
-	login: 1,
+export const playgroundClient: Writable<PlaygroundClient> | Writable<null> = writable(null);
+
+export const wpUrl: Writable<string> = writable('', (set) => {
+	useBrowserContext().subscribe((location) => {
+		// @ts-expect-error possible undefined doesn't matter
+		set(location.pathname + location.search);
+	});
 });
 
-function getUrlWithOptions(url: string, options: WPPlaygroundOptions): URL {
-	const newUrl = new URL(url);
-	for (const [key, value] of Object.entries(options)) {
-		if (value && !Array.isArray(value)) {
-			newUrl.searchParams.set(key, value.toString());
-		} else if (value && Array.isArray(value)) {
-			value.forEach((item) => {
-				newUrl.searchParams.append(key, item.toString());
-			});
-		}
-	}
-	return newUrl;
-}
+export const WP_PLAYGROUND_REMOTE_API = 'https://playground.wordpress.net/remote.html';
+export const WP_PLAYGROUND_DEFAULT_URL = '/wp-admin/admin.php?page=graphiql-ide';
 
-export function getWpPlaygroundUrl(options: WPPlaygroundOptions): URL {
-	return getUrlWithOptions(WP_PLAYGROUND_API_URL, options);
-}
+export const SupportedWordPressVersionsList = ['5.9', '6.0', '6.1', '6.2'];
 
-export function startPlayground(element: HTMLIFrameElement, options: WPPlaygroundOptions = {}) {
-	// element.addEventListener("load", function() {
-
-	// });
-
-	const url = getWpPlaygroundUrl(options);
-	element.src = url.toString();
+export function makeWpGraphQLBlueprint({
+	landingPage,
+	preferredVersions,
+}: Required<Pick<Blueprint, 'landingPage' | 'preferredVersions'>>): Blueprint {
+	return {
+		landingPage,
+		preferredVersions,
+		steps: [
+			{
+				step: 'login',
+				username: 'admin',
+				password: 'password',
+			},
+			{
+				step: 'installPlugin',
+				pluginZipFile: {
+					resource: 'wordpress.org/plugins',
+					slug: 'wp-graphql',
+				},
+				options: {
+					activate: true,
+				},
+			},
+		],
+	};
 }

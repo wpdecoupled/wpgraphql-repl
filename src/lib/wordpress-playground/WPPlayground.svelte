@@ -1,17 +1,42 @@
 <script lang="ts">
-	// import { startPlaygroundWeb, type PlaygroundClient } from '@wp-playground/client';
-	// import { wpPlaygroundClientStore } from '$lib/stores';
 	import { onMount } from 'svelte';
-	// import { setupWPPlayground, wpGraphQLBlueprint } from '$lib/graphiql/WPPlugin';
-	import { getWpPlaygroundUrl, playgroundOptionsStore } from './api';
+
+	import { startPlaygroundWeb, type PlaygroundClient } from '@wp-playground/client';
+
+	import { makeWpGraphQLBlueprint, WP_PLAYGROUND_REMOTE_API } from '$lib/wordpress-playground';
+	import { wpUrl, playgroundClient, wpVersion, phpVersion } from '$lib/wordpress-playground';
+
+	let wppFrame: HTMLIFrameElement;
+
+
+
+	$: onMount(async () => {
+		const client: PlaygroundClient = await startPlaygroundWeb({
+			iframe: wppFrame,
+			remoteUrl: WP_PLAYGROUND_REMOTE_API,
+			blueprint: makeWpGraphQLBlueprint({
+				landingPage: $wpUrl,
+				preferredVersions: { php: $phpVersion, wp: $wpVersion },
+			}),
+		});
+
+		await client.isReady();
+
+		playgroundClient.set(client);
+
+		client.onNavigation((url: string) => {
+			console.log('onNavigation', url);
+			wpUrl.set(url);
+		});
+	});
 </script>
 
 <iframe
+	bind:this={wppFrame}
 	id="wp"
-	src={getWpPlaygroundUrl($playgroundOptionsStore).toString()}
 	width="100%"
 	height="100%"
-	title="WordPress Instance"
+	title="WordPress Playground Instance"
 />
 
 <style>
