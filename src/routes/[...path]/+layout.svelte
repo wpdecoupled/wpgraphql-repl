@@ -7,7 +7,6 @@
 	$: if (browser) {
 		history.pushState({}, '', $replState);
 	}
-
 </script>
 
 <Seo title={$wpUrl} titleTemplate="%t% | WPGraphQL REPL" />
