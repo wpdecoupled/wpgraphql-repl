@@ -14,13 +14,11 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
-		"@types/react": "^17.0.1",
-		"@types/react-dom": "^17.0.1",
-		"@typescript-eslint/eslint-plugin": "^5.45.0",
-		"@typescript-eslint/parser": "^5.45.0",
+		"@typescript-eslint/eslint-plugin": "^5.59.7",
+		"@typescript-eslint/parser": "^5.59.7",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte": "^2.26.0",
+		"eslint-plugin-svelte": "^2.29.0",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
 		"svelte": "^3.54.0",
@@ -34,6 +32,7 @@
 		"@sentry/sveltekit": "^7.52.1",
 		"@svelteuidev/composables": "^0.12.1",
 		"@svelteuidev/core": "^0.12.1",
+		"@wp-playground/blueprints": "^0.1.46",
 		"@wp-playground/client": "^0.1.46",
 		"http-status-codes": "^2.2.0"
 	}

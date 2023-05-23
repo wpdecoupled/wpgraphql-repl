@@ -1,36 +1,68 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 
 	import { startPlaygroundWeb, type PlaygroundClient } from '@wp-playground/client';
 
-	import { makeWpGraphQLBlueprint, WP_PLAYGROUND_REMOTE_API } from '$lib/wordpress-playground';
-	import { wpUrl, playgroundClient, wpVersion, phpVersion } from '$lib/wordpress-playground';
+	import {
+		WP_PLAYGROUND_DEFAULT_URL,
+		makeWpGraphQLBlueprint,
+		WP_PLAYGROUND_REMOTE_API,
+		playgroundClient,
+		getWordPressVersion,
+		getPHPVersion,
+		WP_PLAYGROUND_URL_PARAM,
+		getPlaygroundUrl,
+	} from '$lib/wordpress-playground';
 
 	let wppFrame: HTMLIFrameElement;
 
-	$: blueprint = makeWpGraphQLBlueprint({
-		landingPage: $wpUrl,
-		preferredVersions: {
-			wp: $wpVersion,
-			php: $phpVersion,
-		},
-	});
+	$: {
+		if (browser) {
+			const workingWpVersion = getWordPressVersion($page.url);
+			const workingPhpVersion = getPHPVersion($page.url);
 
-	onMount(async () => {
-		const client: PlaygroundClient = await startPlaygroundWeb({
-			iframe: wppFrame,
-			remoteUrl: WP_PLAYGROUND_REMOTE_API,
-			blueprint,
-		});
+			const blueprint = makeWpGraphQLBlueprint({
+				landingPage: getPlaygroundUrl($page.url) ?? WP_PLAYGROUND_DEFAULT_URL,
+				preferredVersions: {
+					wp: workingWpVersion,
+					php: workingPhpVersion,
+				},
+			});
 
-		await client.isReady();
+			const setupPlayground = async () => {
+				const client: PlaygroundClient = await startPlaygroundWeb({
+					iframe: wppFrame,
+					remoteUrl: WP_PLAYGROUND_REMOTE_API,
+					blueprint,
+				});
 
-		playgroundClient.set(client);
+				await client.isReady();
 
-		client.onNavigation((url: string) => {
-			wpUrl.set(url);
-		});
-	});
+				playgroundClient.set(client);
+
+				client.onNavigation((url: string) => {
+					/**
+					 * WARNING: Mutating the URL object directly will not trigger a reactivity update
+					 * This is due to the faact that we're mutating the object directly, so when reactivity
+					 * compares the old and new values, they are the same.
+					 *
+					 * For this parameter, in this use case, this is what we want. But this is probably not a recommended practice.
+					 * If we find a better method to prevent render loops, we should use it
+					 */
+					$page.url.searchParams.set(WP_PLAYGROUND_URL_PARAM, url);
+
+					goto($page.url, {
+						noScroll: true,
+						keepFocus: true,
+					});
+				});
+			};
+
+			setupPlayground();
+		}
+	}
 </script>
 
 <iframe

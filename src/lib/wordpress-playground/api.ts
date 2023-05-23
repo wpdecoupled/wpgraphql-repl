@@ -1,75 +1,78 @@
-//client for WordPress Playground query API
-
 /**
- * Docs URL: https://wordpress.github.io/wordpress-playground/docs/query-api
+ * Docs URL: https://wordpress.github.io/wordpress-playground/api/client
  *
- *
- * Option				Default Value				Description
- * ------------------------------------------------------------
- * php					8.0									Loads the specified PHP version. Supported values: 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, latest
- * wp						latest							Loads the specified WordPress version. Supported values: 5.9, 6.0, 6.1, 6.2, latest
- * plugin														Installs the specified plugin. Use the plugin name from the plugins directory URL, e.g. for a URL like https://wordpress.org/plugins/wp-lazy-loading/, the plugin name would be wp-lazy-loading. You can pre-install multiple plugins by saying plugin=coblocks&plugin=wp-lazy-loading&…. Installing a plugin automatically logs the user in as an admin
- * theme														Installs the specified theme. Use the theme name from the themes directory URL, e.g. for a URL like https://wordpress.org/themes/disco/, the theme name would be disco. Installing a theme automatically logs the user in as an admin
- * url					/wp-admin						Load the specified initial page displaying WordPress
- * mode					seamless						Displays WordPress on a full-page or wraps it in a browser UI
- * login				1										Logs the user in as an admin
- * gutenberg-pr											Loads the specified Gutenberg Pull Request
  */
 
-import { writable, derived, type Writable, type Readable } from 'svelte/store';
-import { page } from '$app/stores';
-import { browser } from '$app/environment';
+import { writable } from 'svelte/store';
 
-import { LatestSupportedPHPVersion } from '@wp-playground/client';
+import type { PlaygroundClient, Blueprint } from '@wp-playground/client';
 
-import type {
-	PlaygroundClient,
-	Blueprint,
-	SupportedPHPVersion,
-	supportedWordPressVersion,
-} from '@wp-playground/client';
+export const SupportedWordPressVersionsList = ['5.9', '6.0', '6.1', '6.2'] as const;
+export type SupportedWordPressVersion = (typeof SupportedWordPressVersionsList)[number];
+export const LatestSupportedWordPressVersion: SupportedWordPressVersion = '6.2';
 
-export const wpVersion: Writable<supportedWordPressVersion> = writable('6.2', (set) => {
-	page.subscribe(({ url }) => {
-		if (url.href) {
-			const wpVersion = new URL(url.href).searchParams.get('wp');
-			if (wpVersion && SupportedWordPressVersionsList.includes(wpVersion)) {
-				// @ts-expect-error type narrowing is needed
-				set(wpVersion);
-			}
-		}
-	});
-});
+export function isSupportedWordPressVersion(version: string): version is SupportedWordPressVersion {
+	return SupportedWordPressVersionsList.includes(version as SupportedWordPressVersion);
+}
 
-export const phpVersion: Writable<SupportedPHPVersion> = writable(LatestSupportedPHPVersion);
+export function getWordPressVersion(url: URL): SupportedWordPressVersion {
+	const wpVersion = url.searchParams.get(WP_PLAYGROUND_WP_VERSION_PARAM);
 
-export const playgroundClient: Writable<PlaygroundClient> | Writable<null> = writable(null);
-
-export const wpUrl: Writable<string> = writable('', (set) => {
-	page.subscribe(({ url }) => {
-		// Remove the search params so they don't get passed to the Playground
-		url.searchParams.delete('wp');
-		url.searchParams.delete('php');
-		set(`${url.pathname}${url.search}`);
-	});
-});
-
-export const replState: Readable<string> = derived(
-	[wpUrl, wpVersion, phpVersion, page],
-	([$wpUrl, $wpVersion, $phpVersion, $page], set) => {
-		const uri = new URL($wpUrl, $page.url.origin);
-
-		uri.searchParams.set('wp', $wpVersion);
-		uri.searchParams.set('php', $phpVersion);
-		console.log('replState', uri.toString());
-		set(uri.toString());
+	if (!wpVersion || !isSupportedWordPressVersion(wpVersion)) {
+		return LatestSupportedWordPressVersion;
 	}
-);
+
+	return wpVersion;
+}
+
+export const SupportedPHPVersionsList = [
+	'5.6',
+	'7.0',
+	'7.1',
+	'7.2',
+	'7.3',
+	'7.4',
+	'8.0',
+	'8.1',
+	'8.2',
+] as const;
+
+export type SupportedPHPVersion = (typeof SupportedPHPVersionsList)[number];
+export const LatestSupportedPHPVersion: SupportedPHPVersion = '8.2';
+
+function isSupportedPHPVersion(version: string): version is SupportedPHPVersion {
+	return SupportedPHPVersionsList.includes(version as SupportedPHPVersion);
+}
+
+export function getPHPVersion(url: URL): SupportedPHPVersion {
+	const phpVersion = url.searchParams.get(WP_PLAYGROUND_PHP_VERSION_PARAM);
+
+	if (!phpVersion || !isSupportedPHPVersion(phpVersion)) {
+		return LatestSupportedPHPVersion;
+	}
+
+	return phpVersion;
+}
+
+export const playgroundClient = writable<PlaygroundClient>(null);
 
 export const WP_PLAYGROUND_REMOTE_API = 'https://playground.wordpress.net/remote.html';
+
 export const WP_PLAYGROUND_DEFAULT_URL = '/wp-admin/admin.php?page=graphiql-ide';
 
-export const SupportedWordPressVersionsList = ['5.9', '6.0', '6.1', '6.2'];
+export const WP_PLAYGROUND_URL_PARAM = 'playground_url';
+export const WP_PLAYGROUND_WP_VERSION_PARAM = 'wp';
+export const WP_PLAYGROUND_PHP_VERSION_PARAM = 'php';
+
+export function getPlaygroundUrl(url: URL) {
+	const playground_url = url.searchParams.get(WP_PLAYGROUND_URL_PARAM);
+
+	if (!playground_url) {
+		return WP_PLAYGROUND_DEFAULT_URL;
+	}
+
+	return playground_url;
+}
 
 export function makeWpGraphQLBlueprint({
 	landingPage,
