@@ -1,3 +1,5 @@
+import extend from 'just-extend';
+
 /**
  * Docs URL: https://wordpress.github.io/wordpress-playground/api/client
  *
@@ -74,29 +76,60 @@ export function getPlaygroundUrl(url: URL) {
 	return playground_url;
 }
 
-export function makeWpGraphQLBlueprint({
-	landingPage,
-	preferredVersions,
-}: Required<Pick<Blueprint, 'landingPage' | 'preferredVersions'>>): Blueprint {
-	return {
-		landingPage,
-		preferredVersions,
-		steps: [
-			{
-				step: 'login',
-				username: 'admin',
-				password: 'password',
+export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blueprint {
+	return extend(
+		{
+			landingPage: WP_PLAYGROUND_DEFAULT_URL,
+			preferredVersions: {
+				wp: LatestSupportedWordPressVersion,
+				php: LatestSupportedPHPVersion,
 			},
-			{
-				step: 'installPlugin',
-				pluginZipFile: {
-					resource: 'wordpress.org/plugins',
-					slug: 'wp-graphql',
+			steps: [
+				{
+					step: 'login',
+					username: 'admin',
+					password: 'password',
 				},
-				options: {
-					activate: true,
+				{
+					step: 'installPlugin',
+					pluginZipFile: {
+						resource: 'wordpress.org/plugins',
+						slug: 'wp-graphql',
+					},
+					options: {
+						activate: true,
+					},
 				},
-			},
-		],
-	};
+			],
+		},
+		customBlueprint
+	);
+}
+
+export function generatePlaygroundKey(url: URL) {
+	const wpVersion = getWordPressVersion(url);
+	const phpVersion = getPHPVersion(url);
+
+	return `${wpVersion}-${phpVersion}`;
+}
+
+export function hasAllPlaygroundParams(url: URL) {
+	return (
+		url.searchParams.has(WP_PLAYGROUND_WP_VERSION_PARAM) &&
+		url.searchParams.has(WP_PLAYGROUND_PHP_VERSION_PARAM) &&
+		url.searchParams.has(WP_PLAYGROUND_URL_PARAM)
+	);
+}
+
+export function getAllPlaygroundParams(url: URL) {
+	const newURL = new URL(url);
+	const wpVersion = getWordPressVersion(url);
+	const phpVersion = getPHPVersion(url);
+	const playgroundUrl = getPlaygroundUrl(url);
+
+	newURL.searchParams.set(WP_PLAYGROUND_WP_VERSION_PARAM, wpVersion);
+	newURL.searchParams.set(WP_PLAYGROUND_PHP_VERSION_PARAM, phpVersion);
+	newURL.searchParams.set(WP_PLAYGROUND_URL_PARAM, playgroundUrl);
+
+	return newURL;
 }

@@ -34,6 +34,7 @@
 		"@svelteuidev/core": "^0.12.1",
 		"@wp-playground/blueprints": "^0.1.46",
 		"@wp-playground/client": "^0.1.46",
-		"http-status-codes": "^2.2.0"
+		"http-status-codes": "^2.2.0",
+		"just-extend": "^6.2.0"
 	}
 }

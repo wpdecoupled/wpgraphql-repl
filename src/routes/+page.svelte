@@ -13,12 +13,11 @@
 	// function toggleOpened() {
 	// 	opened = !opened;
 	// }
-
 </script>
 
-<AppShell navbarOffsetBreakpoint="sm" asideOffsetBreakpoint="sm" padding="0">
+<AppShell fixed navbarOffsetBreakpoint="sm" asideOffsetBreakpoint="sm" padding="0">
 	<Header slot="header" height="44">
-		<Title order={1} align="center">WP GraphQL REPL <span id="beta-tag">Beta</span></Title>
+		<h1><img id="wpgraphql-logo" src="https://www.wpgraphql.com/logo-wpgraphql.svg" title="WP GraphQL" alt="WP GraphQL Logo" height="32"/>WPGraphQL REPL <span id="beta-tag">Beta</span></h1>
 	</Header>
 	<Aside
 		slot="navbar"
@@ -30,19 +29,41 @@
 		<ConfigPanel />
 	</Aside>
 
-		<WpPlayground />
-	<Footer slot="footer" height="50">
+	<WpPlayground />
+	<footer slot="footer">
 		<p>Copyright © 2023 - AVLIT, LLC. All Rights Reserved.</p>
-	</Footer>
+		<p>
+			Brought to you by <a href="https://wpdecoupled.dev" target="_blank" rel="noopener"
+				>WP Decoupled</a
+			>
+		</p>
+	</footer>
 </AppShell>
 
 <style>
+	h1 {
+		margin: 0.5em;
+		text-align: center;
+	}
+
+	#wpgraphql-logo{
+		vertical-align: middle;
+		height: 48px;
+		margin: 0;
+	}
+	footer {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		/* text-align: center; */
+	}
+
 	#beta-tag {
-		font-size: 0.5em;
+		font-size: 0.3em;
 		text-transform: uppercase;
-		padding: 0.4em;
-		border: 1px solid blue;
+		padding: 0.2em;
+		border: 1px solid #f97316;
 		border-radius: 1em;
-		/* color: blue; */
+		vertical-align: super;
 	}
 </style>
