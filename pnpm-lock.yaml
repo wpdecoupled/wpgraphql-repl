@@ -31,9 +31,6 @@ dependencies:
   '@smui/tooltip':
     specifier: 7.0.0-beta.8
     version: 7.0.0-beta.8(svelte@3.59.1)(typescript@5.0.4)
-  '@svelteuidev/composables':
-    specifier: ^0.12.1
-    version: 0.12.1
   '@wp-playground/blueprints':
     specifier: ^0.1.46
     version: 0.1.46
@@ -1142,10 +1139,6 @@ packages:
       vitefu: 0.2.4(vite@4.3.8)
     transitivePeerDependencies:
       - supports-color
-
-  /@svelteuidev/composables@0.12.1:
-    resolution: {integrity: sha512-4w17gQex9mcJZhYvzuKxT5X1bDVWJQFjThZif32DKEKi9iL9adD2zScckjidEnP8kHZBntEhUF7a64ofgNtRsA==}
-    dev: false
 
   /@types/cookie@0.5.1:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
