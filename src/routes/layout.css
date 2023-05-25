@@ -1,5 +1,10 @@
 @import 'normalize.css';
 
+* {
+	box-sizing: border-box;
+	scrollbar-width: thin;
+	scrollbar-gutter: auto;
+}
 
 /* Variables */
 :root {

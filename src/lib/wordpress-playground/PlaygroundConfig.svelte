@@ -1,10 +1,12 @@
 <script lang="ts">
 	import Textfield from '@smui/textfield';
-	import List from '@smui/list';
+	import List, { Item, Text, PrimaryText, Label } from '@smui/list';
 	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import Select, { Option } from '@smui/select';
 	import Card from '@smui/card';
+	import { plugins } from '$lib/graphql-plugins';
+
 	import {
 		SupportedWordPressVersionsList,
 		SupportedPHPVersionsList,
@@ -39,12 +41,12 @@
 				}
 			}}
 		>
-		<Icon class="material-icons" slot="trailingIcon">link</Icon>
+			<Icon class="material-icons" slot="trailingIcon">link</Icon>
 		</Textfield>
 	</Card>
 	<Accordion>
-		<Panel>
-			<Header bind:open={stackPanel}>
+		<Panel bind:open={stackPanel}>
+			<Header>
 				<h3>Stack</h3>
 				<IconButton slot="icon" toggle pressed={stackPanel}>
 					<Icon class="material-icons" on>settings</Icon>
@@ -64,10 +66,8 @@
 				</Select>
 			</Content>
 		</Panel>
-	</Accordion>
-	<Accordion>
-		<Panel>
-			<Header bind:open={pluginPanel}>
+		<Panel bind:open={pluginPanel}>
+			<Header>
 				<h3>Plugins</h3>
 				<IconButton slot="icon" toggle pressed={pluginPanel}>
 					<Icon class="material-icons" on>extension</Icon>
@@ -75,22 +75,26 @@
 				</IconButton>
 			</Header>
 			<Content>
+				<List on:change={(e) => console.log('change', e)}>
+					{#each plugins as plugin}
+						<Item>
+							<Text>
+								<PrimaryText>{plugin.name}</PrimaryText>
+							</Text>
 
+							<!-- <Switch bind:value={selectedPlugins} data-value={plugin.slug} /> -->
+						</Item>
+					{/each}
+				</List>
 			</Content>
 		</Panel>
 	</Accordion>
-
-	<!-- <Button
-		variant="filled"
-		title="Reset State"
-		on:click={() => {
-			$client.reset();
-		}}>Reset Playground</Button
-	> -->
 </section>
 
 <style>
 	section {
+		scroll-behavior: smooth;
+		overflow-y: auto;
 		padding: 6px;
 		border-right: 2px solid var(--color-background);
 		height: 100%;

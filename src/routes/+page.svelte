@@ -6,18 +6,16 @@
 
 <main>
 	<header>
-		<h1>
-			<img
-				id="wpgraphql-logo"
-				src="/logo-wpgraphql.svg"
-				title="WP GraphQL"
-				alt="WP GraphQL Logo"
-				height="32px"
-				width="32px"
-			/><span id="repl">REPL</span><span id="beta-tag">Beta</span>
-		</h1>
+		<img
+			id="wpgraphql-logo"
+			src="/logo-wpgraphql.svg"
+			title="WP GraphQL"
+			alt="WP GraphQL Logo"
+			height="48px"
+			width="48px"
+		/>
 
-		<ReplSettings />
+		<ReplSettings on:toast={(data) => console.log(data)} />
 	</header>
 
 	<aside>
@@ -44,7 +42,7 @@
 		box-sizing: content-box;
 		display: grid;
 		grid-template-rows: min-content auto min-content;
-		grid-template-columns: 300px 1fr;
+		grid-template-columns: 400px 1fr;
 		grid-template-areas:
 			'header header'
 			'aside playground'
@@ -53,24 +51,27 @@
 
 	header {
 		grid-area: header;
-		display: flex;
-		justify-content: flex-start;
+		display: grid;
+		grid-template-columns: min-content 1fr min-content;
+		grid-template-rows: 1fr;
+		grid-template-areas: 'title name buttons';
+		/* justify-content: flex-start; */
 		align-items: center;
-		padding: 0.5em;
+		gap: 1em;
+		width: 100%;
+		padding: 0.5em 1em;
 		background-color: var(--color-background);
 	}
-
 	#playground {
 		grid-area: playground;
 	}
 
 	aside {
+		overflow-y: hidden;
 		grid-area: aside;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		overflow-y:auto;
-		scroll-behavior: smooth;
 	}
 
 	footer {
@@ -78,28 +79,5 @@
 		justify-content: space-around;
 		align-items: center;
 		background-color: var(--color-background);
-	}
-
-	h1 {
-		font-size: 24px;
-		margin: 0.25em;
-	}
-
-	#repl {
-		vertical-align: middle;
-	}
-	#wpgraphql-logo {
-		aspect-ratio: 1 / 1;
-		margin: 0;
-		vertical-align: middle;
-	}
-
-	#beta-tag {
-		font-size: 0.3em;
-		text-transform: uppercase;
-		padding: 0.2em;
-		border: 1px solid var(--color-highlight);
-		border-radius: 1em;
-		vertical-align: super;
 	}
 </style>
