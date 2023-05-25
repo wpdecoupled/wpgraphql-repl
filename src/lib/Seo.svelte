@@ -7,7 +7,7 @@
 		config: { name },
 	} = getPlaygroundContext();
 
-	$: title = `${name} • REPL • WPGraphQL`;
+	$: title = `${$name} • REPL • WPGraphQL`;
 	const description = `A REPL for WPGraphQL from the comfort of your browser`;
 	const image = new URL(`/og`, $page.url);
 </script>
