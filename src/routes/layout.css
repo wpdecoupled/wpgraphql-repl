@@ -1,0 +1,31 @@
+@import 'normalize.css';
+
+
+/* Variables */
+:root {
+	--color-primary: #1e293b;
+	--color-background: #e2e8f0;
+	--color-highlight: #f97316;
+}
+
+
+html {
+	/* Typography */
+	color: var(--color-primary);
+	font-family: Inter var, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+		Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+		Segoe UI Symbol, Noto Color Emoji;
+}
+
+/* Input defaults */
+input {
+	outline: none;
+	border: none;
+	background-color: var(--color-background);
+	border-radius: 1rem;
+	padding: 0.1rem  .5rem;
+}
+
+input:focus {
+	outline: solid 2px var(--color-highlight);
+}

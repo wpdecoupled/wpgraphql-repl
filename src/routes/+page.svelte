@@ -1,68 +1,104 @@
 <script lang="ts">
-	import { AppShell, Aside, Header, Title, Footer } from '@svelteuidev/core';
-
-	import ConfigPanel from '$lib/ConfigPanel.svelte';
-	import WpPlayground from '$lib/wordpress-playground';
-
-	// let isDark = false;
-	let opened = true;
-
-	// function toggleTheme() {
-	// 	isDark = !isDark;
-	// }
-	// function toggleOpened() {
-	// 	opened = !opened;
-	// }
+	import { PlaygroundConfig } from '$lib/wordpress-playground';
+	import { Playground } from '$lib/wordpress-playground';
+	import ReplSettings from '$lib/ReplSettings.svelte';
 </script>
 
-<AppShell fixed navbarOffsetBreakpoint="sm" asideOffsetBreakpoint="sm" padding="0">
-	<Header slot="header" height="44">
-		<h1><img id="wpgraphql-logo" src="https://www.wpgraphql.com/logo-wpgraphql.svg" title="WP GraphQL" alt="WP GraphQL Logo" height="32"/>WPGraphQL REPL <span id="beta-tag">Beta</span></h1>
-	</Header>
-	<Aside
-		slot="navbar"
-		width={{
-			sm: 200,
-		}}
-		hidden={!opened}
-	>
-		<ConfigPanel />
-	</Aside>
+<main>
+	<header>
+		<h1>
+			<img
+				id="wpgraphql-logo"
+				src="/logo-wpgraphql.svg"
+				title="WP GraphQL"
+				alt="WP GraphQL Logo"
+				height="32px"
+				width="32px"
+			/><span id="repl">REPL</span><span id="beta-tag">Beta</span>
+		</h1>
 
-	<WpPlayground />
-	<footer slot="footer">
-		<p>Copyright © 2023 - AVLIT, LLC. All Rights Reserved.</p>
-		<p>
-			Brought to you by <a href="https://wpdecoupled.dev" target="_blank" rel="noopener"
-				>WP Decoupled</a
-			>
-		</p>
-	</footer>
-</AppShell>
+		<ReplSettings />
+	</header>
+
+	<aside>
+		<PlaygroundConfig />
+
+		<footer>
+			<p>
+				Brought to you by <a href="https://wpdecoupled.dev" target="_blank" rel="noopener"
+					>WP Decoupled</a
+				>
+			</p>
+		</footer>
+	</aside>
+
+	<section id="playground">
+		<Playground />
+	</section>
+</main>
 
 <style>
-	h1 {
-		margin: 0.5em;
-		text-align: center;
+	main {
+		height: 100vh;
+		overflow: hidden;
+		box-sizing: content-box;
+		display: grid;
+		grid-template-rows: min-content auto min-content;
+		grid-template-columns: 300px 1fr;
+		grid-template-areas:
+			'header header'
+			'aside playground'
+			'footer footer';
 	}
 
-	#wpgraphql-logo{
-		vertical-align: middle;
-		height: 48px;
-		margin: 0;
+	header {
+		grid-area: header;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 0.5em;
+		background-color: var(--color-background);
 	}
+
+	#playground {
+		grid-area: playground;
+	}
+
+	aside {
+		grid-area: aside;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		overflow-y:auto;
+		scroll-behavior: smooth;
+	}
+
 	footer {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		/* text-align: center; */
+		background-color: var(--color-background);
+	}
+
+	h1 {
+		font-size: 24px;
+		margin: 0.25em;
+	}
+
+	#repl {
+		vertical-align: middle;
+	}
+	#wpgraphql-logo {
+		aspect-ratio: 1 / 1;
+		margin: 0;
+		vertical-align: middle;
 	}
 
 	#beta-tag {
 		font-size: 0.3em;
 		text-transform: uppercase;
 		padding: 0.2em;
-		border: 1px solid #f97316;
+		border: 1px solid var(--color-highlight);
 		border-radius: 1em;
 		vertical-align: super;
 	}

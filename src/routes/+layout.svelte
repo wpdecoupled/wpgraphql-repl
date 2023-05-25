@@ -1,10 +1,16 @@
 <script lang="ts">
-	import { SvelteUIProvider, TypographyProvider, Seo } from '@svelteuidev/core';
+	import Seo from '$lib/Seo.svelte';
+	// import 'normalize.css';
+	import './layout.css';
+
+	import { SearchParamsStorageProvider, PlaygroundProvider } from '$lib/wordpress-playground';
 </script>
 
-<Seo title="Playground" titleTemplate="%t% | WPGraphQL REPL" />
-<SvelteUIProvider withNormalizeCSS withGlobalStyles>
-	<TypographyProvider>
-		<slot />
-	</TypographyProvider>
-</SvelteUIProvider>
+<PlaygroundProvider>
+	<SearchParamsStorageProvider />
+	<Seo />
+	<slot />
+</PlaygroundProvider>
+
+<style>
+</style>

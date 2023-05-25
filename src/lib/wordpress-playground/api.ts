@@ -1,31 +1,42 @@
+import { writable, derived, type Readable } from 'svelte/store';
+import { getContext, setContext } from 'svelte';
 import extend from 'just-extend';
+
+import type { PlaygroundClient, Blueprint } from '@wp-playground/client';
 
 /**
  * Docs URL: https://wordpress.github.io/wordpress-playground/api/client
  *
  */
+export const PLAYGROUND_REMOTE_API = 'https://playground.wordpress.net/remote.html';
 
-import { writable } from 'svelte/store';
-
-import type { PlaygroundClient, Blueprint } from '@wp-playground/client';
+/**
+ * WP Version Stuff
+ */
+export const PLAYGROUND_WP_VERSION_PARAM = 'wp';
 
 export const SupportedWordPressVersionsList = ['5.9', '6.0', '6.1', '6.2'] as const;
-export type SupportedWordPressVersion = (typeof SupportedWordPressVersionsList)[number];
-export const LatestSupportedWordPressVersion: SupportedWordPressVersion = '6.2';
+export type SupportedWordPressVersions = (typeof SupportedWordPressVersionsList)[number];
+const PLAYGROUND_WP_DEFAULT: SupportedWordPressVersions = '6.2';
 
-export function isSupportedWordPressVersion(version: string): version is SupportedWordPressVersion {
-	return SupportedWordPressVersionsList.includes(version as SupportedWordPressVersion);
+function isSupportedWordPressVersion(version: string): version is SupportedWordPressVersions {
+	return SupportedWordPressVersionsList.includes(version as SupportedWordPressVersions);
 }
 
-export function getWordPressVersion(url: URL): SupportedWordPressVersion {
-	const wpVersion = url.searchParams.get(WP_PLAYGROUND_WP_VERSION_PARAM);
+function getWordPressVersion(url: URL): SupportedWordPressVersions {
+	const wpVersion = url.searchParams.get(PLAYGROUND_WP_VERSION_PARAM);
 
 	if (!wpVersion || !isSupportedWordPressVersion(wpVersion)) {
-		return LatestSupportedWordPressVersion;
+		return PLAYGROUND_WP_DEFAULT;
 	}
 
 	return wpVersion;
 }
+
+/**
+ * WP PHP Stuff
+ */
+export const PLAYGROUND_PHP_VERSION_PARAM = 'php';
 
 export const SupportedPHPVersionsList = [
 	'5.6',
@@ -39,50 +50,86 @@ export const SupportedPHPVersionsList = [
 	'8.2',
 ] as const;
 
-export type SupportedPHPVersion = (typeof SupportedPHPVersionsList)[number];
-export const LatestSupportedPHPVersion: SupportedPHPVersion = '8.2';
+export type SupportedPHPVersions = (typeof SupportedPHPVersionsList)[number];
+const PLAYGROUND_PHP_DEFAULT: SupportedPHPVersions = '8.2';
 
-function isSupportedPHPVersion(version: string): version is SupportedPHPVersion {
-	return SupportedPHPVersionsList.includes(version as SupportedPHPVersion);
+function isSupportedPHPVersion(version: string): version is SupportedPHPVersions {
+	return SupportedPHPVersionsList.includes(version as SupportedPHPVersions);
 }
 
-export function getPHPVersion(url: URL): SupportedPHPVersion {
-	const phpVersion = url.searchParams.get(WP_PLAYGROUND_PHP_VERSION_PARAM);
+function getPHPVersion(url: URL): SupportedPHPVersions {
+	const phpVersion = url.searchParams.get(PLAYGROUND_PHP_VERSION_PARAM);
 
 	if (!phpVersion || !isSupportedPHPVersion(phpVersion)) {
-		return LatestSupportedPHPVersion;
+		return PLAYGROUND_PHP_DEFAULT;
 	}
 
 	return phpVersion;
 }
 
-export const playgroundClient = writable<PlaygroundClient>(null);
+/**
+ * WP URL Stuff
+ */
+const PLAYGROUND_URL_DEFAULT = '/wp-admin/admin.php?page=graphiql-ide';
 
-export const WP_PLAYGROUND_REMOTE_API = 'https://playground.wordpress.net/remote.html';
-
-export const WP_PLAYGROUND_DEFAULT_URL = '/wp-admin/admin.php?page=graphiql-ide';
-
-export const WP_PLAYGROUND_URL_PARAM = 'playground_url';
-export const WP_PLAYGROUND_WP_VERSION_PARAM = 'wp';
-export const WP_PLAYGROUND_PHP_VERSION_PARAM = 'php';
-
-export function getPlaygroundUrl(url: URL) {
-	const playground_url = url.searchParams.get(WP_PLAYGROUND_URL_PARAM);
-
-	if (!playground_url) {
-		return WP_PLAYGROUND_DEFAULT_URL;
-	}
-
-	return playground_url;
+function getPlaygroundUrl(url: URL) {
+	return url.searchParams.get(PLAYGROUND_URL_PARAM) || PLAYGROUND_URL_DEFAULT;
 }
+
+/**
+ * WP Name Stuff
+ */
+export const REPL_NAME_PARAM = 'name';
+export const REPL_NAME_DEFAULT = 'Hello World';
+
+export function getReplName(url: URL) {
+	return url.searchParams.get(REPL_NAME_PARAM) || REPL_NAME_DEFAULT;
+}
+
+/**
+ * Utils
+ */
+
+export const PLAYGROUND_URL_PARAM = 'playground_url';
+
+type ParamsConfig = {
+	[key: string]: {
+		default: string;
+		init: (url: URL) => string;
+		fetch: (context: PlaygroundContext) => Readable<string>;
+	};
+};
+
+export const PLAYGROUND_PARAMS: ParamsConfig = {
+	[PLAYGROUND_WP_VERSION_PARAM]: {
+		default: PLAYGROUND_WP_DEFAULT,
+		init: getWordPressVersion,
+		fetch: (context) => context.config.stackVersions.wp,
+	},
+	[PLAYGROUND_PHP_VERSION_PARAM]: {
+		default: PLAYGROUND_PHP_DEFAULT,
+		init: getPHPVersion,
+		fetch: (context) => context.config.stackVersions.php,
+	},
+	[PLAYGROUND_URL_PARAM]: {
+		default: PLAYGROUND_URL_DEFAULT,
+		init: getPlaygroundUrl,
+		fetch: (context) => context.config.wpUrl,
+	},
+	[REPL_NAME_PARAM]: {
+		default: REPL_NAME_DEFAULT,
+		init: getReplName,
+		fetch: (context) => context.config.name,
+	},
+};
 
 export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blueprint {
 	return extend(
 		{
-			landingPage: WP_PLAYGROUND_DEFAULT_URL,
+			landingPage: PLAYGROUND_URL_DEFAULT,
 			preferredVersions: {
-				wp: LatestSupportedWordPressVersion,
-				php: LatestSupportedPHPVersion,
+				wp: PLAYGROUND_WP_DEFAULT,
+				php: PLAYGROUND_PHP_DEFAULT,
 			},
 			steps: [
 				{
@@ -106,30 +153,63 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 	);
 }
 
-export function generatePlaygroundKey(url: URL) {
-	const wpVersion = getWordPressVersion(url);
-	const phpVersion = getPHPVersion(url);
-
-	return `${wpVersion}-${phpVersion}`;
-}
-
+//Checks if all required params are present in URL
 export function hasAllPlaygroundParams(url: URL) {
-	return (
-		url.searchParams.has(WP_PLAYGROUND_WP_VERSION_PARAM) &&
-		url.searchParams.has(WP_PLAYGROUND_PHP_VERSION_PARAM) &&
-		url.searchParams.has(WP_PLAYGROUND_URL_PARAM)
-	);
+	for (const param of Object.keys(PLAYGROUND_PARAMS)) {
+		if (!url.searchParams.has(param)) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
+//Reads from URL and sets default values for missing params
 export function getAllPlaygroundParams(url: URL) {
 	const newURL = new URL(url);
-	const wpVersion = getWordPressVersion(url);
-	const phpVersion = getPHPVersion(url);
-	const playgroundUrl = getPlaygroundUrl(url);
 
-	newURL.searchParams.set(WP_PLAYGROUND_WP_VERSION_PARAM, wpVersion);
-	newURL.searchParams.set(WP_PLAYGROUND_PHP_VERSION_PARAM, phpVersion);
-	newURL.searchParams.set(WP_PLAYGROUND_URL_PARAM, playgroundUrl);
+	for (const [param, config] of Object.entries(PLAYGROUND_PARAMS)) {
+		newURL.searchParams.set(param, config.init(url));
+	}
 
 	return newURL;
+}
+
+const CONTEXT_KEY = Symbol('wp-playground-context');
+
+function buildContext(url: URL) {
+	const playgroundWPVersion = writable<SupportedWordPressVersions>(getWordPressVersion(url));
+	const playgroundPHPVersion = writable<SupportedPHPVersions>(getPHPVersion(url));
+
+	const playgroundKey = derived<Readable<string>[], string>(
+		[playgroundWPVersion, playgroundPHPVersion],
+		(values, set) => {
+			set(values.join('-'));
+		}
+	);
+
+	return {
+		client: writable<PlaygroundClient>(null),
+		key: playgroundKey,
+		config: {
+			wpUrl: writable<string>(getPlaygroundUrl(url)),
+			stackVersions: {
+				wp: playgroundWPVersion,
+				php: playgroundPHPVersion,
+			},
+			name: writable<string>(PLAYGROUND_PARAMS.name.init(url)),
+		},
+	};
+}
+
+export type PlaygroundContext = ReturnType<typeof buildContext>;
+
+//Creates initial context from URL
+export function setPlaygroundContext(url: URL) {
+	setContext<PlaygroundContext>(CONTEXT_KEY, buildContext(url));
+}
+
+//Returns current context
+export function getPlaygroundContext(): PlaygroundContext {
+	return getContext(CONTEXT_KEY);
 }

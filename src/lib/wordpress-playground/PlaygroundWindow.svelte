@@ -1,20 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
-
 	import { startPlaygroundWeb, type PlaygroundClient } from '@wp-playground/client';
 
 	import {
+		getPlaygroundContext,
 		makeWpGraphQLBlueprint,
-		WP_PLAYGROUND_REMOTE_API,
-		playgroundClient,
-		WP_PLAYGROUND_URL_PARAM,
+		PLAYGROUND_REMOTE_API,
 	} from '$lib/wordpress-playground';
 
 	export let playgroundOptions: Parameters<typeof makeWpGraphQLBlueprint>[0];
 
 	let wppFrame: HTMLIFrameElement;
+
+	const {
+		client: clientStore,
+		config: { wpUrl },
+	} = getPlaygroundContext();
 
 	onMount(() => {
 		const blueprint = makeWpGraphQLBlueprint(playgroundOptions);
@@ -22,29 +23,25 @@
 		const setupPlayground = async () => {
 			const client: PlaygroundClient = await startPlaygroundWeb({
 				iframe: wppFrame,
-				remoteUrl: WP_PLAYGROUND_REMOTE_API,
+				remoteUrl: PLAYGROUND_REMOTE_API,
 				blueprint,
 			});
 
 			await client.isReady();
 
-			playgroundClient.set(client);
+			clientStore.set(client);
 
 			client.onNavigation((url: string) => {
-				const newUrl = new URL($page.url);
-				newUrl.searchParams.set(WP_PLAYGROUND_URL_PARAM, url);
-
-				goto(newUrl, {
-					noScroll: true,
-					keepFocus: true,
-				});
+				if (url !== $wpUrl) {
+					$wpUrl = url;
+				}
 			});
 		};
 
 		setupPlayground();
 
 		return () => {
-			playgroundClient.set(null);
+			clientStore.set(null);
 		};
 	});
 </script>
