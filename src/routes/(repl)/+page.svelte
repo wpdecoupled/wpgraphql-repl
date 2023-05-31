@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { PlaygroundConfig } from '$lib/wordpress-playground';
 	import { Playground } from '$lib/wordpress-playground';
-	import ReplSettings from '$lib/ReplSettings.svelte';
+	import PlaygroundSidebar from '$lib/PlaygroundSidebar.svelte';
+	import ReplHeader from '$lib/ReplHeader.svelte';
 </script>
 
 <main>
@@ -15,16 +15,18 @@
 			width="48px"
 		/>
 
-		<ReplSettings on:toast={(data) => console.log(data)} />
+		<ReplHeader />
 	</header>
 
 	<aside>
-		<PlaygroundConfig />
+		<PlaygroundSidebar />
 
 		<footer>
 			<p>
-				Brought to you by <a href="https://wpdecoupled.dev/?utm_source=wpgraphql-repl&utm_medium=website&utm_campaign=general" target="_blank" rel="noopener"
-					>WP Decoupled</a
+				Brought to you by <a
+					href="https://wpdecoupled.dev/?utm_source=wpgraphql-repl&utm_medium=website&utm_campaign=general"
+					target="_blank"
+					rel="noopener">WP Decoupled</a
 				>
 			</p>
 		</footer>
