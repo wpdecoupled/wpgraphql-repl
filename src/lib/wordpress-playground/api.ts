@@ -4,6 +4,8 @@ import extend from 'just-extend';
 
 import type { PlaygroundClient, Blueprint } from '@wp-playground/client';
 
+import phpDebug from './php/debug.php?raw';
+
 /**
  * Docs URL: https://wordpress.github.io/wordpress-playground/api/client
  *
@@ -147,6 +149,18 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 						activate: true,
 					},
 				},
+				{
+					step: 'installPlugin',
+					pluginZipFile: {
+						resource: 'wordpress.org/plugins',
+						slug: 'debug-info',
+					}
+				},
+				{
+					step: 'writeFile',
+					path: '/wordpress/debug.php',
+					data: phpDebug,
+				}
 			],
 		},
 		customBlueprint
