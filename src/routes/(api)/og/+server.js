@@ -2,8 +2,8 @@ import { html as toReactNode } from 'satori-html';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 
-import Inter from '$lib/Inter-Regular.ttf';
-import OgImage from '$lib/OgImage.svelte';
+import Inter from '$lib/social/Inter-Regular.ttf';
+import OgImage from '$lib/social/OgImage.svelte';
 
 const height = 630;
 const width = 1200;

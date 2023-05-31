@@ -1,5 +1,5 @@
 <script>
-	import OgImage from '$lib/OgImage.svelte';
+	import OgImage from '$lib/social/OgImage.svelte';
 </script>
 
 
@@ -13,7 +13,7 @@
 <style>
 	@font-face {
 		font-family: 'Inter';
-		src: url('/src/lib/Inter-Regular.ttf');
+		src: url('/src/lib/social/Inter-Regular.ttf');
 	}
 
 	:global(body) {
