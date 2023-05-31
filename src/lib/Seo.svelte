@@ -16,7 +16,7 @@
 	<!-- HTML Meta Tags -->
 	<title>{title}</title>
 	<meta name="description" content="A REPL for WPGraphQL from the comfort of your browser" />
-
+	<meta name="robots" content="index, follow" />
 	<!-- Facebook Meta Tags -->
 	<meta property="og:url" content={$page.url.toString()} />
 	<meta property="og:type" content="website" />
