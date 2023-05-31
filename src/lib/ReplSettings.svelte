@@ -34,8 +34,9 @@
 		<IconButton
 			href="https://github.com/wpdecoupled/wpgraphql-repl/issues/new/choose"
 			class="material-icons"
-			on:click={() => console.log('clicked bug report')}>contact_support</IconButton
-		>
+			target="_blank"
+			>contact_support
+		</IconButton>
 		<Tooltip xPos="start">Contact Developer</Tooltip>
 	</Wrapper>
 </section>
