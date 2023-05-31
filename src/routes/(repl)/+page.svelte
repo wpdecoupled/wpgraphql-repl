@@ -2,6 +2,7 @@
 	import { Playground } from '$lib/wordpress-playground';
 	import PlaygroundSidebar from '$lib/PlaygroundSidebar.svelte';
 	import ReplHeader from '$lib/ReplHeader.svelte';
+	import Resizable from '$lib/Resizable.svelte';
 </script>
 
 <main>
@@ -17,20 +18,21 @@
 
 		<ReplHeader />
 	</header>
+	<Resizable>
+		<aside>
+			<PlaygroundSidebar />
 
-	<aside>
-		<PlaygroundSidebar />
-
-		<footer>
-			<p>
-				Brought to you by <a
-					href="https://wpdecoupled.dev/?utm_source=wpgraphql-repl&utm_medium=website&utm_campaign=general"
-					target="_blank"
-					rel="noopener">WP Decoupled</a
-				>
-			</p>
-		</footer>
-	</aside>
+			<footer>
+				<p>
+					Brought to you by <a
+						href="https://wpdecoupled.dev/?utm_source=wpgraphql-repl&utm_medium=website&utm_campaign=general"
+						target="_blank"
+						rel="noopener">WP Decoupled</a
+					>
+				</p>
+			</footer>
+		</aside>
+	</Resizable>
 
 	<section id="playground">
 		<Playground />
@@ -44,7 +46,7 @@
 		box-sizing: content-box;
 		display: grid;
 		grid-template-rows: min-content auto min-content;
-		grid-template-columns: 400px 1fr;
+		grid-template-columns: min-content 1fr;
 		grid-template-areas:
 			'header header'
 			'aside playground'
@@ -57,7 +59,6 @@
 		grid-template-columns: min-content 1fr min-content;
 		grid-template-rows: 1fr;
 		grid-template-areas: 'title name buttons';
-		/* justify-content: flex-start; */
 		align-items: center;
 		gap: 1em;
 		width: 100%;
@@ -74,6 +75,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		min-height: 100%;
 	}
 
 	footer {
