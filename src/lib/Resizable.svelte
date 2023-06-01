@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { classNames } from '$lib/string';
-	// import { browser } from '$lib/environment';
-	// import { onMount } from 'svelte';
 
 	export let horizontal: boolean = true;
 	export let vertical: boolean = false;
