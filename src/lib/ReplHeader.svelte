@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ConfigReplTitle } from '$lib/config';
-	import { CopyUrl, DownloadSite, ContactDev } from '$lib/buttons';
+	import { CopyUrl, DownloadSite, RequestFeature, ReportBug } from '$lib/buttons';
 </script>
 
 <ConfigReplTitle />
@@ -8,7 +8,8 @@
 <section id="buttons">
 	<CopyUrl />
 	<DownloadSite />
-	<ContactDev />
+	<ReportBug />
+	<RequestFeature />
 </section>
 
 <style>
