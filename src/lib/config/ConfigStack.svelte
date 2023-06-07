@@ -26,15 +26,31 @@
 		</IconButton>
 	</Header>
 	<Content>
-		<Select variant="filled" bind:value={$wp} label="WordPress Version">
-			{#each SupportedWordPressVersionsList as version}
+		<div class="select-stack">
+
+			<Select class="stack-item" variant="filled" bind:value={$wp} label="WordPress Version">
+				{#each SupportedWordPressVersionsList as version}
 				<Option value={version}>{version}</Option>
-			{/each}
-		</Select>
-		<Select variant="filled" bind:value={$php} label="PHP Version">
-			{#each SupportedPHPVersionsList as version}
+				{/each}
+			</Select>
+			<Select class="stack-item" variant="filled" bind:value={$php} label="PHP Version">
+				{#each SupportedPHPVersionsList as version}
 				<Option value={version}>{version}</Option>
-			{/each}
-		</Select>
-	</Content>
-</Panel>
+				{/each}
+			</Select>
+		</div>
+		</Content>
+	</Panel>
+
+<style>
+	.select-stack {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 1em;
+	}
+
+	.select-stack :global(.stack-item) {
+		flex: 1;
+	}
+</style>
