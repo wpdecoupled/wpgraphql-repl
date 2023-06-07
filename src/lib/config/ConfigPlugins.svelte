@@ -6,9 +6,9 @@
 	// import { plugins } from '$lib/graphql-plugins';
 
 	// import {
-		// getPlaygroundContext,
+	// getPlaygroundContext,
 	// } from '$lib/wordpress-playground';
-  import ConfigComingSoon from './ConfigComingSoon.svelte';
+	import ConfigComingSoon from './ConfigComingSoon.svelte';
 
 	// const { client } = getPlaygroundContext();
 

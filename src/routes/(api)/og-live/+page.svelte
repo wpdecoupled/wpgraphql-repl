@@ -2,9 +2,7 @@
 	import OgImage from '$lib/social/OgImage.svelte';
 </script>
 
-
 <div class="background">
-
 	<div class="card">
 		<OgImage />
 	</div>

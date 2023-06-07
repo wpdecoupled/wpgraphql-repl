@@ -154,13 +154,13 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 					pluginZipFile: {
 						resource: 'wordpress.org/plugins',
 						slug: 'debug-info',
-					}
+					},
 				},
 				{
 					step: 'writeFile',
 					path: '/wordpress/debug.php',
 					data: phpDebug,
-				}
+				},
 			],
 		},
 		customBlueprint

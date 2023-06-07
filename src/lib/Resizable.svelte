@@ -56,11 +56,7 @@
 	};
 </script>
 
-<svelte:element
-	this={as}
-	bind:this={resizeEl}
-	class={classNames('resizable', className)}
->
+<svelte:element this={as} bind:this={resizeEl} class={classNames('resizable', className)}>
 	<slot />
 	{#if horizontal}
 		<div class="material-icons resizer resize-r" on:mousedown={mouseDownHandler}>

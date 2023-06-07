@@ -26,4 +26,4 @@ export const plugins = [
 		slug: 'faustwp',
 		required: false,
 	},
-]
+];

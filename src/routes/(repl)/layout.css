@@ -13,7 +13,6 @@
 	--color-highlight: #f97316;
 }
 
-
 html {
 	/* Typography */
 	color: var(--color-primary);
@@ -28,7 +27,7 @@ input {
 	border: none;
 	background-color: var(--color-background);
 	border-radius: 1rem;
-	padding: 0.1rem  .5rem;
+	padding: 0.1rem 0.5rem;
 }
 
 input:focus {

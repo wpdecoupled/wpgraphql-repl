@@ -19,16 +19,16 @@
 		<ReplHeader />
 	</header>
 	<Resizable as="aside" class="sidebar" horizontal>
-			<PlaygroundSidebar />
-			<footer>
-				<p>
-					Brought to you by <a
-						href="https://wpdecoupled.dev/?utm_source=wpgraphql-repl&utm_medium=website&utm_campaign=general"
-						target="_blank"
-						rel="noopener">WP Decoupled</a
-					>
-				</p>
-			</footer>
+		<PlaygroundSidebar />
+		<footer>
+			<p>
+				Brought to you by <a
+					href="https://wpdecoupled.dev/?utm_source=wpgraphql-repl&utm_medium=website&utm_campaign=general"
+					target="_blank"
+					rel="noopener">WP Decoupled</a
+				>
+			</p>
+		</footer>
 	</Resizable>
 
 	<section id="playground">

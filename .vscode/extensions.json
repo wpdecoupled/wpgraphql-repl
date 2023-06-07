@@ -1,8 +1,8 @@
 {
-    "recommendations": [
-        "editorconfig.editorconfig",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "svelte.svelte-vscode"
-    ]
+	"recommendations": [
+		"editorconfig.editorconfig",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"svelte.svelte-vscode"
+	]
 }

@@ -27,20 +27,19 @@
 	</Header>
 	<Content>
 		<div class="select-stack">
-
 			<Select class="stack-item" variant="filled" bind:value={$wp} label="WordPress Version">
 				{#each SupportedWordPressVersionsList as version}
-				<Option value={version}>{version}</Option>
+					<Option value={version}>{version}</Option>
 				{/each}
 			</Select>
 			<Select class="stack-item" variant="filled" bind:value={$php} label="PHP Version">
 				{#each SupportedPHPVersionsList as version}
-				<Option value={version}>{version}</Option>
+					<Option value={version}>{version}</Option>
 				{/each}
 			</Select>
 		</div>
-		</Content>
-	</Panel>
+	</Content>
+</Panel>
 
 <style>
 	.select-stack {
