@@ -1,15 +1,12 @@
 <script lang="ts">
-	// import { classNames } from '$lib/string';
+	import { classNames } from '$lib/string';
 
 	export let horizontal: boolean = false;
 	export let vertical: boolean = false;
+	export let as: string = 'div';
+	let { class: className } = $$props;
 
-	const { class: className, ...restProps } = $$props;
-
-	export let resizeEl: HTMLElement;
-
-	resizeEl?.setAttribute('style', 'position: relative;');
-
+	let resizeEl: HTMLElement;
 	// The current position of mouse
 	let x = 0;
 	let y = 0;
@@ -59,14 +56,26 @@
 	};
 </script>
 
-{#if horizontal}
-	<div class="material-icons resizer resize-r" on:mousedown={mouseDownHandler}>drag_indicator</div>
-{/if}
-{#if vertical}
-	<div class="resizer resize-b" on:mousedown={mouseDownHandler}>drag_handle</div>
-{/if}
+<svelte:element
+	this={as}
+	bind:this={resizeEl}
+	class={classNames('resizable', className)}
+>
+	<slot />
+	{#if horizontal}
+		<div class="material-icons resizer resize-r" on:mousedown={mouseDownHandler}>
+			drag_indicator
+		</div>
+	{/if}
+	{#if vertical}
+		<div class="resizer resize-b" on:mousedown={mouseDownHandler}>drag_handle</div>
+	{/if}
+</svelte:element>
 
 <style>
+	.resizable {
+		position: relative;
+	}
 	.resizer {
 		position: absolute;
 		font-size: small;
