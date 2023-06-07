@@ -3,6 +3,8 @@
 	import PlaygroundSidebar from '$lib/PlaygroundSidebar.svelte';
 	import ReplHeader from '$lib/ReplHeader.svelte';
 	import Resizable from '$lib/Resizable.svelte';
+
+	let resizeEl: HTMLElement;
 </script>
 
 <main>
@@ -18,21 +20,20 @@
 
 		<ReplHeader />
 	</header>
-	<Resizable>
-		<aside>
-			<PlaygroundSidebar />
+	<aside bind:this={resizeEl}>
+		<Resizable {resizeEl} horizontal />
 
-			<footer>
-				<p>
-					Brought to you by <a
-						href="https://wpdecoupled.dev/?utm_source=wpgraphql-repl&utm_medium=website&utm_campaign=general"
-						target="_blank"
-						rel="noopener">WP Decoupled</a
-					>
-				</p>
-			</footer>
-		</aside>
-	</Resizable>
+		<PlaygroundSidebar />
+		<footer>
+			<p>
+				Brought to you by <a
+					href="https://wpdecoupled.dev/?utm_source=wpgraphql-repl&utm_medium=website&utm_campaign=general"
+					target="_blank"
+					rel="noopener">WP Decoupled</a
+				>
+			</p>
+		</footer>
+	</aside>
 
 	<section id="playground">
 		<Playground />
@@ -76,12 +77,13 @@
 		flex-direction: column;
 		justify-content: space-between;
 		min-height: 100%;
+		background-color: var(--color-background);
+
 	}
 
 	footer {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		background-color: var(--color-background);
 	}
 </style>
