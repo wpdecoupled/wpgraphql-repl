@@ -35,7 +35,7 @@
 		}
 	}
 
-	// Same except doesn't add a history entry
+	// Same except does NOT add a history entry
 	$: if (browser) {
 		const newUrl = new URL($page.url);
 
