@@ -5,6 +5,7 @@
 	import Resizable from '$lib/Resizable.svelte';
   import ReplMobileMenu from '$lib/ReplMobileMenu.svelte';
   import PlaygroundMobileConfig from '$lib/PlaygroundMobileConfig.svelte';
+  import ReplProfile from '$lib/ReplProfile.svelte';
 </script>
 
 <main>
@@ -32,13 +33,13 @@
 			</p>
 		</footer>
 	</Resizable>
-	<PlaygroundMobileConfig />
 	<ReplMobileMenu />
 	<section id="playground">
 		<Playground />
 	</section>
 </main>
-
+<ReplProfile />
+<PlaygroundMobileConfig />
 
 <style>
 	main {

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { ConfigReplTitle } from '$lib/config';
-	import { CopyUrl, DownloadSite, RequestFeature, ReportBug, ToggleMobileMenu } from '$lib/buttons';
-  import LoginManagement from './buttons/LoginManagement.svelte';
+	import { CopyUrl, DownloadSite, RequestFeature, ReportBug, Login, SaveRepl } from '$lib/buttons';
 </script>
 
 <ConfigReplTitle />
@@ -9,9 +8,10 @@
 <section class="buttons desktop">
 	<CopyUrl />
 	<DownloadSite />
+	<SaveRepl />
 	<ReportBug />
 	<RequestFeature />
-	<LoginManagement />
+	<Login />
 </section>
 
 <style>

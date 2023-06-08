@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import ConditionalWrapper from '$lib/ConditionalWrapper.svelte';
+	import { classNames } from '$lib/string';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import Fab from '@smui/fab';
 	import Button, { Label } from '@smui/button';
@@ -13,14 +14,17 @@
 	export let icon: string;
 	export let tooltip: string;
 	export let content: string = '';
+	const { class: className, ...restProps } = $$restProps;
 </script>
 
 <ConditionalWrapper tag={Wrapper} condition={buttonType === 'desktop'}>
 	<svelte:component
 		this={buttonType === 'mobile' ? Fab : content ? Button : IconButton}
-		class={buttonType === 'desktop' && !content ? 'material-icons' : undefined}
+		class={classNames(className, {
+			'material-icons': buttonType === 'desktop' && !content,
+		})}
 		on:click
-		{...$$restProps}
+		{...restProps}
 	>
 		{#if buttonType === 'mobile'}
 			<Icon class="material-icons">{icon}</Icon>

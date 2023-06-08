@@ -18,7 +18,6 @@
 		scroll-behavior: smooth;
 		overflow-y: scroll;
 		padding: 0px 6px;
-		border-right: 2px solid var(--color-background);
 		height: 100%;
 		display: flex;
 		flex-direction: column;
