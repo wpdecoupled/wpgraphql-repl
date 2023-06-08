@@ -9,7 +9,7 @@
 		ToggleMobileMenu,
 		isMobileMenuOpen,
 		OpenMobileConfig,
-		Login
+		Login,
 	} from '$lib/buttons';
 	let menu;
 

@@ -41,7 +41,7 @@
 		// Adjust the dimension of element
 		if (horizontal) {
 			const newWidth = w + dx;
-		 if (newWidth <= minimumWidth) {
+			if (newWidth <= minimumWidth) {
 				resizeEl.style.width = `${minimumWidth}px`;
 			} else {
 				resizeEl.style.width = `${newWidth}px`;

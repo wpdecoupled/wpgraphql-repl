@@ -3,9 +3,9 @@
 	import PlaygroundSidebar from '$lib/PlaygroundSidebar.svelte';
 	import ReplHeader from '$lib/ReplHeader.svelte';
 	import Resizable from '$lib/Resizable.svelte';
-  import ReplMobileMenu from '$lib/ReplMobileMenu.svelte';
-  import PlaygroundMobileConfig from '$lib/PlaygroundMobileConfig.svelte';
-  import ReplProfile from '$lib/ReplProfile.svelte';
+	import ReplMobileMenu from '$lib/ReplMobileMenu.svelte';
+	import PlaygroundMobileConfig from '$lib/PlaygroundMobileConfig.svelte';
+	import ReplProfile from '$lib/ReplProfile.svelte';
 </script>
 
 <main>
@@ -51,7 +51,7 @@
 		grid-template-columns: min-content 1fr;
 		grid-template-areas:
 			'header header'
-			'aside playground'
+			'aside playground';
 	}
 
 	header {
@@ -66,7 +66,6 @@
 		padding: 6px;
 		background-color: var(--color-background);
 	}
-
 
 	#playground {
 		grid-area: playground;
@@ -98,8 +97,8 @@
 
 		main {
 			grid-template-areas:
-			'header header'
-			'playground playground'
+				'header header'
+				'playground playground';
 		}
 
 		main :global(.sidebar) {

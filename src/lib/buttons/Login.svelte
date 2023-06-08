@@ -43,7 +43,7 @@
 			aria-hidden="true"
 		/>
 	</div> -->
-	<Button on:click={openProfile} variant="text" style={"padding: 0;"}>
+	<Button on:click={openProfile} variant="text" style={'padding: 0;'}>
 		<div class="user-menu">
 			<span class="user-menu__name">{$page.data.session.user.user_metadata.name}</span>
 			<img
@@ -72,7 +72,6 @@
 		padding-left: 12px;
 		border-left: solid 1px var(--color-highlight);
 		color: var(--color-primary);
-
 	}
 
 	.user-menu .user-menu__name {
