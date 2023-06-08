@@ -7,7 +7,7 @@
 </script>
 
 <BaseButton
-	{type}
+	buttonType={type}
 	icon="content_copy"
 	tooltip="Copy URL"
 	on:click

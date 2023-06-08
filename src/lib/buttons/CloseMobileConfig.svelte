@@ -7,7 +7,7 @@
 </script>
 
 <BaseButton
-	type="desktop"
+	buttonType="desktop"
 	icon="close"
 	tooltip="Close Mobile Config"
 	on:click

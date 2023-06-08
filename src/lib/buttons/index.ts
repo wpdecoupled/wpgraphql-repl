@@ -6,3 +6,4 @@ export { default as RequestFeature } from './RequestFeature.svelte';
 export { default as ToggleMobileMenu, isMobileMenuOpen } from './ToggleMobileMenu.svelte';
 export { default as OpenMobileConfig, isMobileConfigOpen } from './OpenMobileConfig.svelte';
 export { default as CloseMobileConfig } from './CloseMobileConfig.svelte';
+export { default as LoginManagement } from './LoginManagement.svelte';

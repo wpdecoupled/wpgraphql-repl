@@ -40,7 +40,7 @@
 </script>
 
 <BaseButton
-	{type}
+	buttonType={type}
 	icon="download"
 	tooltip="Download WP Site"
 	on:click

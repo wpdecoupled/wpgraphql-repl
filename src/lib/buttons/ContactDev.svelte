@@ -5,7 +5,7 @@
 </script>
 
 <BaseButton
-	{type}
+	buttonType={type}
 	icon="contact_support"
 	tooltip="Contact Developer"
 	href="https://github.com/wpdecoupled/wpgraphql-repl/issues/new/choose"
