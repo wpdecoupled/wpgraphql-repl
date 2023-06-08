@@ -10,11 +10,17 @@
 		},
 	} = getPlaygroundContext();
 
+	const config = {
+		duration: 6000,
+		initial: 0,
+		next: 1,
+	};
+
 	$: if (browser) {
-		toast.push(`Rebuilding with WordPress version: ${$wp}`);
+		toast.push(`Building with WP v${$wp}`, { duration: 6000 });
 	}
 
 	$: if (browser) {
-		toast.push(`Rebuilding with PHP version: ${$php}`);
+		toast.push(`Building with PHP v${$php}`, { duration: 6000 });
 	}
 </script>
