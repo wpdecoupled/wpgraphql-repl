@@ -2,7 +2,9 @@
 	import Textfield from '@smui/textfield';
 	import { Icon } from '@smui/icon-button';
 	import Card from '@smui/card';
+
 	import { getPlaygroundContext } from '$lib/wordpress-playground';
+	import { toast } from '@zerodevx/svelte-toast';
 
 	const {
 		config: { wpUrl },
@@ -20,9 +22,11 @@
 		label="WordPress URL"
 		bind:value={workingUrl}
 		on:keydown={(e) => {
+			// @ts-expect-error
 			if (e.key === 'Enter') {
 				if ($client !== null) {
 					$client.goTo(workingUrl);
+					toast.push('Navigating to URL');
 				} else {
 					throw Error('Client is not ready');
 				}

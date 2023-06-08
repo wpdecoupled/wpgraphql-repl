@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { zipEntireSite } from '@wp-playground/client';
 	import slugify from 'slugify';
+	import { toast } from '@zerodevx/svelte-toast';
+
 	import IconButton from '@smui/icon-button';
 	import Tooltip, { Wrapper } from '@smui/tooltip';
 
@@ -12,9 +14,14 @@
 	} = getPlaygroundContext();
 
 	$: handleDownload = async () => {
+		const id = toast.push('Preparing Zip for Download...', {
+			dismissable: false,
+		});
 		const timeStart = Date.now();
 		console.log('creating zip file');
 		const file = await zipEntireSite($client);
+		toast.pop(id);
+
 		const timeEnd = Date.now();
 		console.log('zip file created in ', timeEnd - timeStart, 'ms');
 		const fileUrl = URL.createObjectURL(file);
@@ -25,6 +32,7 @@
 		a.download = fileName || 'download';
 
 		a.click();
+		toast.push('Downloading zip!');
 
 		URL.revokeObjectURL(fileUrl);
 	};

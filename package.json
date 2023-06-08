@@ -45,6 +45,7 @@
 		"@vercel/og": "^0.5.6",
 		"@wp-playground/blueprints": "^0.1.60",
 		"@wp-playground/client": "^0.1.60",
+		"@zerodevx/svelte-toast": "^0.9.3",
 		"http-status-codes": "^2.2.0",
 		"just-extend": "^6.2.0",
 		"normalize.css": "^8.0.1",

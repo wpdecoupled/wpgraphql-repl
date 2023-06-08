@@ -32,7 +32,15 @@
 					<Option value={version}>{version}</Option>
 				{/each}
 			</Select>
-			<Select class="stack-item" variant="filled" bind:value={$php} label="PHP Version">
+			<Select
+				class="stack-item"
+				variant="filled"
+				bind:value={$php}
+				on:change={(e) => {
+					console.log('test');
+				}}
+				label="PHP Version"
+			>
 				{#each SupportedPHPVersionsList as version}
 					<Option value={version}>{version}</Option>
 				{/each}
