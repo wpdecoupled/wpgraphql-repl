@@ -19,10 +19,6 @@
 		<div id="mobile-playground-spacer">
 			<PlaygroundSidebar id="default-focus-content" />
 		</div>
-
-		<Actions>
-			<CloseByStore store={isMobileConfigOpen} tooltip="Close Config" />
-		</Actions>
 	</Dialog>
 </div>
 

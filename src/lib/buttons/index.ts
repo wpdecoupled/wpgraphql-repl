@@ -7,5 +7,4 @@ export { default as ToggleMobileMenu, isMobileMenuOpen } from './ToggleMobileMen
 export { default as OpenMobileConfig, isMobileConfigOpen } from './OpenMobileConfig.svelte';
 export { default as Login, isProfileOpen } from './Login.svelte';
 export { default as SaveRepl } from './SaveRepl.svelte';
-export { default as CloseByStore } from './CloseByStore.svelte';
 export { default as Logout } from './Logout.svelte';

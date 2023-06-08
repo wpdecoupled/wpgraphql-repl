@@ -11,6 +11,7 @@
 	import Fab from '@smui/fab';
 	import Button, { Icon, Label } from '@smui/button';
 	import BaseButton, { type ButtonType } from './BaseButton.svelte';
+  import { toast } from '@zerodevx/svelte-toast';
 
 	export let type: ButtonType = 'desktop';
 
@@ -29,20 +30,14 @@
 			width="wide"
 			style={type === 'desktop' ? 'width: max-content;' : ''}
 			on:click
+			on:click={() => {
+				toast.push('Logging in...')
+			}}
 			type="submit"
 			{...$$restProps}
 		/>
 	</form>
 {:else if type === 'desktop'}
-	<!-- <div class="user-menu">
-		<span class="user-menu__name">{$page.data.session.user.user_metadata.name}</span>
-		<img
-			class="user-menu__avatar"
-			src={$page.data.session.user.user_metadata.avatar_url}
-			alt="user profile photo"
-			aria-hidden="true"
-		/>
-	</div> -->
 	<Button on:click={openProfile} variant="text" style={'padding: 0;'}>
 		<div class="user-menu">
 			<span class="user-menu__name">{$page.data.session.user.user_metadata.name}</span>
