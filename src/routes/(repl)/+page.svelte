@@ -4,6 +4,7 @@
 	import ReplHeader from '$lib/ReplHeader.svelte';
 	import Resizable from '$lib/Resizable.svelte';
   import ReplMobileMenu from '$lib/ReplMobileMenu.svelte';
+  import PlaygroundMobileConfig from '$lib/PlaygroundMobileConfig.svelte';
 </script>
 
 <main>
@@ -36,6 +37,7 @@
 		<Playground />
 	</section>
 </main>
+<PlaygroundMobileConfig />
 <ReplMobileMenu />
 
 <style>

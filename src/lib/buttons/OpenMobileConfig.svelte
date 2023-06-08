@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { writable } from 'svelte/store';
 
-	export const isMobileMenuOpen = writable(false);
+	export const isMobileConfigOpen = writable(false);
 </script>
 
 <script lang="ts">
@@ -10,9 +10,11 @@
 
 <BaseButton
 	type="mobile"
-	icon="{$isMobileMenuOpen ? "close" : "menu"}"
-	tooltip="Toggle Mobile Menu"
+	icon="settings"
+	tooltip="Toggle Mobile Config"
+	on:click
 	on:click={() => {
-		$isMobileMenuOpen = !$isMobileMenuOpen;
+		$isMobileConfigOpen = !$isMobileConfigOpen;
 	}}
+	{...$$restProps}
 />

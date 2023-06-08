@@ -4,7 +4,7 @@
 	import { ConfigUrl, ConfigStack, ConfigPlugins } from '$lib/config';
 </script>
 
-<section>
+<section {...$$restProps}>
 	<ConfigUrl />
 
 	<Accordion>

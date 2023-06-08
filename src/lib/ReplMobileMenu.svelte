@@ -8,7 +8,7 @@
 		ReportBug,
 		ToggleMobileMenu,
 		isMobileMenuOpen,
-		ToggleMobileConfig,
+		OpenMobileConfig,
 	} from '$lib/buttons';
 	let menu;
 
@@ -27,7 +27,7 @@
 		style="box-shadow: none; overflow:visible"
 	>
 		<section class="menu mobile">
-			<ToggleMobileConfig on:click={toggleMenu} />
+			<OpenMobileConfig on:click={toggleMenu} />
 			<CopyUrl type="mobile" on:click={toggleMenu} />
 			<DownloadSite type="mobile" on:click={toggleMenu} />
 			<ReportBug type="mobile" on:click={toggleMenu} />
