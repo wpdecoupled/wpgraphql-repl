@@ -1,14 +1,14 @@
 <script lang="ts">
-	import IconButton from '@smui/icon-button';
-	import Tooltip, { Wrapper } from '@smui/tooltip';
+	import BaseButton, { type ButtonType } from './BaseButton.svelte';
+
+	export let type: ButtonType = 'desktop';
 </script>
 
-<Wrapper>
-	<IconButton
-		href="https://github.com/wpdecoupled/wpgraphql-repl/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title="
-		class="material-icons"
-		target="_blank"
-		>lightbulb
-	</IconButton>
-	<Tooltip xPos="start">Feature Request</Tooltip>
-</Wrapper>
+<BaseButton
+	{type}
+	icon="lightbulb"
+	tooltip="Request Feature"
+	href="https://github.com/wpdecoupled/wpgraphql-repl/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title="
+	target="_blank"
+	{...$$restProps}
+/>
