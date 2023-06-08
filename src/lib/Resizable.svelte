@@ -4,6 +4,7 @@
 	export let horizontal: boolean = false;
 	export let vertical: boolean = false;
 	export let as: string = 'div';
+	export let minimumWidth: number = 300;
 	let { class: className } = $$props;
 
 	let resizeEl: HTMLElement;
@@ -39,12 +40,15 @@
 
 		// Adjust the dimension of element
 		if (horizontal) {
-			console.log(w + dx);
-			resizeEl.style.width = `${w + dx}px`;
+			const newWidth = w + dx;
+		 if (newWidth <= minimumWidth) {
+				resizeEl.style.width = `${minimumWidth}px`;
+			} else {
+				resizeEl.style.width = `${newWidth}px`;
+			}
 		}
 
 		if (vertical) {
-			console.log(w + dy);
 			resizeEl.style.height = `${h + dy}px`;
 		}
 	};

@@ -73,6 +73,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		min-height: 100%;
+		min-width: 300px;
 		background-color: var(--color-background);
 	}
 
