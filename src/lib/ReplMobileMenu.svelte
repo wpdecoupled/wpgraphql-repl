@@ -15,12 +15,13 @@
 	function toggleMenu() {
 		$isMobileMenuOpen = !$isMobileMenuOpen;
 	}
-	$: console.log("mobile menu open", $isMobileMenuOpen)
 
 	$: menu?.setOpen($isMobileMenuOpen);
 </script>
 
 <aside class="buttons mobile">
+	<ToggleMobileMenu />
+
 	<MenuSurface
 		bind:this={menu}
 		anchorCorner="BOTTOM_START"
@@ -34,8 +35,6 @@
 			<RequestFeature type="mobile" on:click={toggleMenu} />
 		</section>
 	</MenuSurface>
-	<ToggleMobileMenu />
-
 </aside>
 
 <style>

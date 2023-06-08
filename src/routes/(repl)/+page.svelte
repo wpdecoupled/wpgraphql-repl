@@ -32,13 +32,13 @@
 			</p>
 		</footer>
 	</Resizable>
-
+	<PlaygroundMobileConfig />
+	<ReplMobileMenu />
 	<section id="playground">
 		<Playground />
 	</section>
 </main>
-<PlaygroundMobileConfig />
-<ReplMobileMenu />
+
 
 <style>
 	main {
