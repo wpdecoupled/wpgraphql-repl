@@ -12,6 +12,7 @@
 	type="mobile"
 	icon="settings"
 	tooltip="Toggle Mobile Config"
+	on:click
 	on:click={() => {
 		$isMobileConfigOpen = !$isMobileConfigOpen;
 	}}

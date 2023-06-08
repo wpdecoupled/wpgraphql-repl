@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { ConfigReplTitle } from '$lib/config';
-	import { CopyUrl, DownloadSite, RequestFeature, ReportBug } from '$lib/buttons';
+	import { CopyUrl, DownloadSite, RequestFeature, ReportBug, ToggleMobileMenu } from '$lib/buttons';
 </script>
 
 <ConfigReplTitle />
 
-<section id="buttons">
+<section class="buttons desktop">
 	<CopyUrl />
 	<DownloadSite />
 	<ReportBug />
@@ -13,8 +13,13 @@
 </section>
 
 <style>
-	#buttons {
+	.buttons.desktop {
 		display: flex;
-		/* justify-content: space-between; */
+	}
+
+	@media (max-width: 899px) {
+		.buttons.desktop {
+			display: none;
+		}
 	}
 </style>

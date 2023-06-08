@@ -32,4 +32,13 @@
 		--toastColor: var(--color-background);
 		--toastBarBackground: var(--color-highlight);
 	}
+
+	@media (max-width: 899px) {
+		:root {
+			--toastContainerTop: auto;
+			--toastContainerLeft: 20px;
+			--toastContainerBottom: calc(20px - 0.5rem);
+			--toastContainerRight: auto;
+		}
+	}
 </style>

@@ -3,6 +3,7 @@
 	import PlaygroundSidebar from '$lib/PlaygroundSidebar.svelte';
 	import ReplHeader from '$lib/ReplHeader.svelte';
 	import Resizable from '$lib/Resizable.svelte';
+  import ReplMobileMenu from '$lib/ReplMobileMenu.svelte';
 </script>
 
 <main>
@@ -35,6 +36,7 @@
 		<Playground />
 	</section>
 </main>
+<ReplMobileMenu />
 
 <style>
 	main {
@@ -42,12 +44,11 @@
 		overflow: hidden;
 		box-sizing: content-box;
 		display: grid;
-		grid-template-rows: min-content auto min-content;
+		grid-template-rows: min-content auto;
 		grid-template-columns: min-content 1fr;
 		grid-template-areas:
 			'header header'
 			'aside playground'
-			'footer footer';
 	}
 
 	header {
@@ -59,9 +60,11 @@
 		align-items: center;
 		gap: 1em;
 		width: 100%;
-		padding: 0.5em 1em;
+		padding: 6px;
 		background-color: var(--color-background);
 	}
+
+
 	#playground {
 		grid-area: playground;
 	}
@@ -81,5 +84,23 @@
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
+	}
+
+	@media (max-width: 899px) {
+		header {
+			grid-template-columns: min-content 1fr;
+
+			grid-template-areas: 'title name';
+		}
+
+		main {
+			grid-template-areas:
+			'header header'
+			'playground playground'
+		}
+
+		main :global(.sidebar) {
+			display: none;
+		}
 	}
 </style>

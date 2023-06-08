@@ -1,17 +1,19 @@
 <script lang="ts">
-	import IconButton from '@smui/icon-button';
-	import Tooltip, { Wrapper } from '@smui/tooltip';
 	import { toast } from '@zerodevx/svelte-toast';
+
+	import BaseButton, { type ButtonType } from './BaseButton.svelte';
+
+	export let type: ButtonType = 'desktop';
 </script>
 
-<!-- @TODO: Wire Up with custom events triggering toast messages  -->
-<Wrapper>
-	<IconButton
-		class="material-icons"
-		on:click={async () => {
-			toast.push('URL copied to clipboard');
-			await navigator.clipboard.writeText(window.location.href);
-		}}>content_copy</IconButton
-	>
-	<Tooltip xPos="start">Copy URL</Tooltip>
-</Wrapper>
+<BaseButton
+	{type}
+	icon="content_copy"
+	tooltip="Copy URL"
+	on:click
+	on:click={async () => {
+		toast.push('URL copied to clipboard');
+		await navigator.clipboard.writeText(window.location.href);
+	}}
+	{...$$restProps}
+/>

@@ -10,5 +10,6 @@
 	tooltip="Report Bug"
 	href="https://github.com/wpdecoupled/wpgraphql-repl/issues/new?assignees=&labels=bug&projects=&template=bug_report.md&title="
 	target="_blank"
+	on:click
 	{...$$restProps}
 />

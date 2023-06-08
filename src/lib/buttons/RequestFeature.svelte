@@ -10,5 +10,6 @@
 	tooltip="Request Feature"
 	href="https://github.com/wpdecoupled/wpgraphql-repl/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title="
 	target="_blank"
+	on:click
 	{...$$restProps}
 />

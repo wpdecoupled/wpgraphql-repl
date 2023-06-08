@@ -3,10 +3,10 @@
 	import slugify from 'slugify';
 	import { toast } from '@zerodevx/svelte-toast';
 
-	import IconButton from '@smui/icon-button';
-	import Tooltip, { Wrapper } from '@smui/tooltip';
-
 	import { getPlaygroundContext } from '$lib/wordpress-playground';
+	import BaseButton, { type ButtonType } from './BaseButton.svelte';
+
+	export let type: ButtonType = 'desktop';
 
 	const {
 		config: { name },
@@ -16,6 +16,7 @@
 	$: handleDownload = async () => {
 		const id = toast.push('Preparing Zip for Download...', {
 			dismissable: false,
+			duration: 20000,
 		});
 		const timeStart = Date.now();
 		console.log('creating zip file');
@@ -38,8 +39,11 @@
 	};
 </script>
 
-<!-- @TODO: Wire Up with custom events triggering toast messages  -->
-<Wrapper>
-	<IconButton class="material-icons" on:click={handleDownload}>download</IconButton>
-	<Tooltip xPos="start">Download WP Site</Tooltip>
-</Wrapper>
+<BaseButton
+	{type}
+	icon="download"
+	tooltip="Download WP Site"
+	on:click
+	on:click={handleDownload}
+	{...$$restProps}
+/>
