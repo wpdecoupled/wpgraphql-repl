@@ -5,7 +5,7 @@
 </script>
 
 <BaseButton
-	{type}
+	buttonType={type}
 	icon="lightbulb"
 	tooltip="Request Feature"
 	href="https://github.com/wpdecoupled/wpgraphql-repl/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title="

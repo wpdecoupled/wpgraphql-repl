@@ -5,4 +5,7 @@ export { default as ReportBug } from './ReportBug.svelte';
 export { default as RequestFeature } from './RequestFeature.svelte';
 export { default as ToggleMobileMenu, isMobileMenuOpen } from './ToggleMobileMenu.svelte';
 export { default as OpenMobileConfig, isMobileConfigOpen } from './OpenMobileConfig.svelte';
-export { default as CloseMobileConfig } from './CloseMobileConfig.svelte';
+export { default as Login, isProfileOpen } from './Login.svelte';
+export { default as SaveRepl } from './SaveRepl.svelte';
+export { default as CloseByStore } from './CloseByStore.svelte';
+export { default as Logout } from './Logout.svelte';

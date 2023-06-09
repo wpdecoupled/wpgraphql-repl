@@ -11,7 +11,8 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"prepare": "pnpm smui-theme",
-		"smui-theme": "smui-theme compile static/smui.css -i src/theme"
+		"smui-theme": "smui-theme compile static/smui.css -i src/theme",
+		"supabase-types": "supabase gen types typescript --local > src/lib/database.types.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "^1.20.2",
@@ -22,6 +23,7 @@
 		"eslint-plugin-svelte": "^2.30.0",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
+		"supabase": "^1.64.8",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.4.3",
 		"tslib": "^2.5.3",
@@ -33,6 +35,7 @@
 		"@resvg/resvg-js": "^2.4.1",
 		"@sentry/sveltekit": "^7.54.0",
 		"@smui-extra/accordion": "7.0.0-beta.8",
+		"@smui/button": "^7.0.0-beta.8",
 		"@smui/card": "7.0.0-beta.8",
 		"@smui/dialog": "^7.0.0-beta.8",
 		"@smui/fab": "7.0.0-beta.8",
@@ -44,6 +47,8 @@
 		"@smui/switch": "7.0.0-beta.8",
 		"@smui/textfield": "7.0.0-beta.8",
 		"@smui/tooltip": "7.0.0-beta.8",
+		"@supabase/auth-helpers-sveltekit": "^0.10.1",
+		"@supabase/supabase-js": "^2.24.0",
 		"@sveltejs/adapter-vercel": "^3.0.1",
 		"@vercel/og": "^0.5.6",
 		"@wp-playground/blueprints": "^0.1.60",

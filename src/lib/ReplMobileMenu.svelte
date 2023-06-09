@@ -9,6 +9,7 @@
 		ToggleMobileMenu,
 		isMobileMenuOpen,
 		OpenMobileConfig,
+		Login,
 	} from '$lib/buttons';
 	let menu;
 
@@ -33,6 +34,7 @@
 			<DownloadSite type="mobile" on:click={toggleMenu} />
 			<ReportBug type="mobile" on:click={toggleMenu} />
 			<RequestFeature type="mobile" on:click={toggleMenu} />
+			<Login type="mobile" on:click={toggleMenu} />
 		</section>
 	</MenuSurface>
 </aside>

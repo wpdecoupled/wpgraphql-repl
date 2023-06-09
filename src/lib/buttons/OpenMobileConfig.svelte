@@ -9,7 +9,7 @@
 </script>
 
 <BaseButton
-	type="mobile"
+	buttonType="mobile"
 	icon="settings"
 	tooltip="Toggle Mobile Config"
 	on:click

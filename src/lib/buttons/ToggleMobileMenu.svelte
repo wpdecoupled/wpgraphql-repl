@@ -9,8 +9,8 @@
 </script>
 
 <BaseButton
-	type="mobile"
-	icon="{$isMobileMenuOpen ? "close" : "menu"}"
+	buttonType="mobile"
+	icon={$isMobileMenuOpen ? 'close' : 'menu'}
 	tooltip="Toggle Mobile Menu"
 	on:click={() => {
 		$isMobileMenuOpen = !$isMobileMenuOpen;
