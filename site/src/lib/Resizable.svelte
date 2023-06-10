@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classNames } from '$lib/string';
+	import { classNames } from '$lib/utils/string';
 
 	export let horizontal: boolean = false;
 	export let vertical: boolean = false;

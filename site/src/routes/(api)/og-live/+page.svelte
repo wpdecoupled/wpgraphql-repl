@@ -27,7 +27,7 @@
 		height: 100vh;
 		background-color: grey;
 		margin: 0;
-		paddng: 0;
+		padding: 0;
 	}
 
 	.card {
