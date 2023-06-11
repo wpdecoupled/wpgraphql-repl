@@ -2,7 +2,7 @@ import { html as toReactNode } from 'satori-html';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 
-import { OgImage, InterFont } from '$lib/Seo';
+import { OgImage, InterFont } from '$lib/seo';
 
 const height = 630;
 const width = 1200;
