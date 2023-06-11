@@ -1291,11 +1291,6 @@
     satori "0.9.1"
     yoga-wasm-web "0.3.3"
 
-"@wp-playground/blueprints@^0.1.60":
-  version "0.1.60"
-  resolved "https://registry.yarnpkg.com/@wp-playground/blueprints/-/blueprints-0.1.60.tgz#efd1225f3235f47631aa24ae12c7e7c32d56dccc"
-  integrity sha512-F0bFvWy0jAWpRryNFgwgdxpB5A/LBr5jFiggY7hGqdkJTU8jUYbwnwt5V5mOqeVOMDEFc5APTEEhm7fHX6EX+g==
-
 "@wp-playground/client@^0.1.60":
   version "0.1.60"
   resolved "https://registry.yarnpkg.com/@wp-playground/client/-/client-0.1.60.tgz#61e404d6f9ed8608fb57cb03af55d3a6c2b51821"
@@ -2752,7 +2747,7 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier-plugin-svelte@^2.10.1:
+prettier-plugin-svelte@^2.10.1, prettier-plugin-svelte@^2.8.1:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-2.10.1.tgz#e1abbe5689e8a926c60b8bc42e61233556ca90d1"
   integrity sha512-Wlq7Z5v2ueCubWo0TZzKc9XHcm7TDxqcuzRuGd0gcENfzfT4JZ9yDlCbEgxWgiPmLHkBjfOtpAWkcT28MCDpUQ==

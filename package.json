@@ -2,14 +2,14 @@
 	"private": true,
 	"workspaces": [
 		"site",
-		"playground"
+		"wpgraphql-playground"
 	],
 	"scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write ."
-  },
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"format": "turbo run format"
+	},
 	"devDependencies": {
 		"turbo": "^1.10.3"
 	}

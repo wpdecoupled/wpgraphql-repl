@@ -8,7 +8,8 @@
 			],
 			"outputs": [
 				".svelte-kit/**",
-				".vercel/**"
+				".vercel/**",
+				"dist/**"
 			]
 		},
 		"prepare": {
@@ -17,6 +18,7 @@
 			]
 		},
 		"lint": {},
+		"format": {},
 		"dev": {
 			"cache": false,
 			"persistent": true

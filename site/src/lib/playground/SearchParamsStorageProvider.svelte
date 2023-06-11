@@ -9,7 +9,7 @@
 		PLAYGROUND_PHP_VERSION_PARAM,
 		PLAYGROUND_URL_PARAM,
 		REPL_NAME_PARAM,
-	} from '$lib/wordpress-playground';
+	} from '$lib/playground';
 
 	const {
 		config: {
