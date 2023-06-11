@@ -2,11 +2,9 @@
 	import { Panel, Header, Content } from '@smui-extra/accordion';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import Select, { Option } from '@smui/select';
-	import {
-		SupportedWordPressVersionsList,
-		SupportedPHPVersionsList,
-		getPlaygroundContext,
-	} from '$lib/wordpress-playground';
+	import { getPlaygroundContext } from '$lib/playground';
+
+	import { SupportedWordPressVersionsList, SupportedPHPVersionsList } from 'wpgraphql-playground';
 
 	const {
 		config: {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { toast } from '@zerodevx/svelte-toast';
-	import { getPlaygroundContext } from '$lib/wordpress-playground';
+	import { getPlaygroundContext } from '$lib/playground';
 
 	const {
 		config: {

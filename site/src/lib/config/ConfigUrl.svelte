@@ -3,7 +3,7 @@
 	import { Icon } from '@smui/icon-button';
 	import Card from '@smui/card';
 
-	import { getPlaygroundContext } from '$lib/wordpress-playground';
+	import { getPlaygroundContext } from '$lib/playground';
 	import { toast } from '@zerodevx/svelte-toast';
 
 	const {

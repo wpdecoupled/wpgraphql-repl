@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Textfield from '@smui/textfield';
 
-	import { getPlaygroundContext } from '$lib/wordpress-playground';
+	import { getPlaygroundContext } from '$lib/playground';
 
 	const {
 		config: { name },

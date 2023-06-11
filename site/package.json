@@ -9,7 +9,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write .",
+		"format": "prettier --write .",
 		"prepare": "yarn smui-theme",
 		"smui-theme": "smui-theme compile static/smui.css -i src/theme"
 	},
@@ -46,15 +46,13 @@
 		"@smui/tooltip": "7.0.0-beta.8",
 		"@sveltejs/adapter-vercel": "^3.0.1",
 		"@vercel/og": "^0.5.6",
-		"@wp-playground/blueprints": "^0.1.60",
-		"@wp-playground/client": "^0.1.60",
 		"@zerodevx/svelte-toast": "^0.9.3",
 		"http-status-codes": "^2.2.0",
-		"just-extend": "^6.2.0",
 		"normalize.css": "^8.0.1",
 		"satori": "^0.10.1",
 		"satori-html": "^0.3.2",
 		"slugify": "^1.6.6",
-		"smui-theme": "7.0.0-beta.8"
+		"smui-theme": "7.0.0-beta.8",
+		"wpgraphql-playground": "*"
 	}
 }

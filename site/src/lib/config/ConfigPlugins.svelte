@@ -7,7 +7,7 @@
 
 	// import {
 	// getPlaygroundContext,
-	// } from '$lib/wordpress-playground';
+	// } from '$lib/playground';
 	import ConfigComingSoon from './ConfigComingSoon.svelte';
 
 	// const { client } = getPlaygroundContext();

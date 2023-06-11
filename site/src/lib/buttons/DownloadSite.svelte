@@ -3,7 +3,7 @@
 	import slugify from 'slugify';
 	import { toast } from '@zerodevx/svelte-toast';
 
-	import { getPlaygroundContext } from '$lib/wordpress-playground';
+	import { getPlaygroundContext } from '$lib/playground';
 	import BaseButton, { type ButtonType } from './BaseButton.svelte';
 
 	export let type: ButtonType = 'desktop';

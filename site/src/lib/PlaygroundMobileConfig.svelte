@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Dialog, { Title, Actions,  } from '@smui/dialog';
+	import Dialog, { Title, Actions } from '@smui/dialog';
 
 	import { isMobileConfigOpen, CloseMobileConfig } from '$lib/buttons';
 	import PlaygroundSidebar from '$lib/PlaygroundSidebar.svelte';

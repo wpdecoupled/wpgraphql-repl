@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { getPlaygroundContext } from '$lib/wordpress-playground';
+	import { getPlaygroundContext } from '$lib/playground';
 
 	const {
 		config: { name },

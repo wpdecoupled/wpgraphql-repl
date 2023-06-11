@@ -5,7 +5,7 @@
 	import './layout.css';
 
 	import { ConfigToastProvider } from '$lib/config';
-	import { SearchParamsStorageProvider, PlaygroundProvider } from '$lib/wordpress-playground';
+	import { PlaygroundProvider } from '$lib/playground';
 
 	const options = {
 		initial: 0,
@@ -14,7 +14,6 @@
 </script>
 
 <PlaygroundProvider>
-	<SearchParamsStorageProvider />
 	<ConfigToastProvider />
 	<Seo />
 	<slot />

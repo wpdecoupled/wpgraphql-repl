@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export type ButtonType = "mobile" | "desktop";
+	export type ButtonType = 'mobile' | 'desktop';
 </script>
 
 <script lang="ts">

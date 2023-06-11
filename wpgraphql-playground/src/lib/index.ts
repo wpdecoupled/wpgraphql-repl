@@ -1,5 +1,5 @@
 export { default as Playground } from './Playground.svelte';
-export * from './stores/index';
+export * from './stores';
 export * from './consts';
 export * from './types';
 export * from './guards';
