@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { SearchParamsStorageProvider } from '$lib/playground';
-	import { Repl } from '$lib/views';
+  import { SearchParamsStorageProvider } from '$lib/storage/browser/queryParams';
+	import ReplView from '$lib/repl/View.svelte';
 </script>
 
 <SearchParamsStorageProvider />
-<Repl />
+<ReplView />

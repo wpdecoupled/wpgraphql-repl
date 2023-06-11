@@ -2,8 +2,7 @@ import { html as toReactNode } from 'satori-html';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 
-import Inter from '$lib/social/Inter-Regular.ttf';
-import OgImage from '$lib/social/OgImage.svelte';
+import { OgImage, InterFont } from '$lib/Seo';
 
 const height = 630;
 const width = 1200;
@@ -12,13 +11,14 @@ const width = 1200;
 export const GET = async ({ url }) => {
 	const title = url.searchParams.get('title') ?? undefined;
 
+	// @ts-expect-error render not found for some reason even https://kit-docs-demo.vercel.app/docs/component-api/server
 	const result = OgImage.render(title);
 	const element = toReactNode(`${result.html}<style>${result.css.code}</style>`);
 	const svg = await satori(element, {
 		fonts: [
 			{
 				name: 'Inter',
-				data: Buffer.from(Inter),
+				data: Buffer.from(InterFont),
 				style: 'normal',
 			},
 		],

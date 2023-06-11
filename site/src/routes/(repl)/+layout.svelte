@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 
-	import Seo from '$lib/Seo.svelte';
+	import { Seo } from '$lib/seo';
 	import './layout.css';
 
-	import { ConfigToastProvider } from '$lib/config';
-	import { PlaygroundProvider } from '$lib/playground';
+	import { ConfigToastProvider } from '$lib/config/components';
+	import { PlaygroundProvider } from '$lib/repl/state';
 
 	const options = {
 		initial: 0,

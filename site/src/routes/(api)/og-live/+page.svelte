@@ -1,5 +1,5 @@
 <script>
-	import OgImage from '$lib/social/OgImage.svelte';
+	import { OgImage } from '$lib/seo';
 </script>
 
 <div class="background">
