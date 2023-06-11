@@ -1,0 +1,5 @@
+{
+	"buildCommand": "yarn build",
+	"devCommand": "yarn dev",
+	"outputDirectory": "site/.vercel"
+}
