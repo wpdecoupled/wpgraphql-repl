@@ -12,8 +12,12 @@
 			],
 			"outputs": [
 				".svelte-kit/**",
-				".vercel/**",
-				"dist/**"
+				".vercel/**"
+			]
+		},
+		"wpgraphql-playground#build": {
+			"outputs": [
+				"dist"
 			]
 		},
 		"prepare": {

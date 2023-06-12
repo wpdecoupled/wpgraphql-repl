@@ -3,8 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "svelte-kit sync && svelte-package --watch",
-		"build": "vite build && yarn run package",
-		"preview": "vite preview",
+		"build": "yarn run package",
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "yarn run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
