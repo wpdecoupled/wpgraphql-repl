@@ -1,7 +1,7 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"pipeline": {
-		"wpgraphql-repl#build": {
+		"build": {
 			"dependsOn": [
 				"prepare",
 				"^build"
