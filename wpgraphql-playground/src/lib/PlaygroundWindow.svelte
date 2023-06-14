@@ -21,8 +21,6 @@
 				blueprint
 			});
 
-			await client.isReady();
-
 			setClient(client);
 
 			client.onNavigation((url: string) => {

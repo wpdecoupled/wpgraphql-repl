@@ -3,8 +3,8 @@
 	import { Icon } from '@smui/icon-button';
 	import Card from '@smui/card';
 
+	import * as toast from '$lib/utils/toast';
 	import { getPlaygroundContext } from '$lib/repl/state';
-	import { toast } from '@zerodevx/svelte-toast';
 
 	const {
 		config: { wpUrl },
@@ -26,7 +26,7 @@
 			if (e.key === 'Enter') {
 				if ($client !== null) {
 					$client.goTo(workingUrl);
-					toast.push('Navigating to URL');
+					toast.notify('Navigating to URL');
 				} else {
 					throw Error('Client is not ready');
 				}

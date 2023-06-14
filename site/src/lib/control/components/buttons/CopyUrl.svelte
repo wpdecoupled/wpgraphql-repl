@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toast } from '@zerodevx/svelte-toast';
+	import * as toast from '$lib/utils/toast';
 
 	import BaseButton, { type ButtonType } from './BaseButton.svelte';
 
@@ -12,7 +12,7 @@
 	tooltip="Copy URL"
 	on:click
 	on:click={async () => {
-		toast.push('URL copied to clipboard');
+		toast.notify('URL copied to clipboard');
 		await navigator.clipboard.writeText(window.location.href);
 	}}
 	{...$$restProps}

@@ -7,17 +7,13 @@
 	import { ConfigToastProvider } from '$lib/config/components';
 	import { PlaygroundProvider } from '$lib/repl/state';
 
-	const options = {
-		initial: 0,
-		next: 1,
-	};
 </script>
 
 <PlaygroundProvider>
 	<ConfigToastProvider />
 	<Seo />
 	<slot />
-	<SvelteToast {options} />
+	<SvelteToast />
 </PlaygroundProvider>
 
 <style>
