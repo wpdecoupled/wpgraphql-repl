@@ -6,7 +6,10 @@
 
 	import { ConfigToastProvider } from '$lib/config/components';
 	import { PlaygroundProvider } from '$lib/repl/state';
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
 
+	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <PlaygroundProvider>

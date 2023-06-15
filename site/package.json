@@ -46,6 +46,7 @@
 		"@smui/textfield": "7.0.0-beta.8",
 		"@smui/tooltip": "7.0.0-beta.8",
 		"@sveltejs/adapter-vercel": "^3.0.1",
+		"@vercel/analytics": "^1.0.1",
 		"@vercel/og": "^0.5.6",
 		"@zerodevx/svelte-toast": "^0.9.3",
 		"http-status-codes": "^2.2.0",
