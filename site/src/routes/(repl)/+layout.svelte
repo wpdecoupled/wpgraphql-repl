@@ -1,14 +1,13 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 
 	import { Seo } from '$lib/seo';
-	import './layout.css';
-
 	import { ConfigToastProvider } from '$lib/config/components';
 	import { PlaygroundProvider } from '$lib/repl/state';
-	import { dev } from '$app/environment';
-	import { inject } from '@vercel/analytics';
 
+	import './layout.css';
 	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
