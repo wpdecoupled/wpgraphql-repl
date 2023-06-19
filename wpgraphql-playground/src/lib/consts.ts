@@ -24,7 +24,7 @@ export const SupportedPHPVersionsList = [
 	'7.4',
 	'8.0',
 	'8.1',
-	'8.2',
+	'8.2'
 ] as const;
 
 export const PLAYGROUND_PHP_DEFAULT: SupportedPHPVersions = '8.2';
@@ -35,7 +35,6 @@ export const PLAYGROUND_PHP_DEFAULT: SupportedPHPVersions = '8.2';
 
 export const PLAYGROUND_URL_DEFAULT = '/wp-admin/admin.php?page=graphiql-ide';
 
-
 /**
  * Playground Config
  */
@@ -44,6 +43,6 @@ export const PLAYGROUND_CONFIG_DEFAULT: PlaygroundConfig = {
 	initUrl: PLAYGROUND_URL_DEFAULT,
 	stackVersions: {
 		wp: PLAYGROUND_WP_DEFAULT,
-		php: PLAYGROUND_PHP_DEFAULT,
+		php: PLAYGROUND_PHP_DEFAULT
 	}
 };

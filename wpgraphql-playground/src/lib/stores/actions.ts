@@ -7,7 +7,7 @@ export function getKey(wpVersion: string, phpVersion: string): string {
 }
 
 export function setClient(client: PlaygroundClient): void {
-	clientStore.set(client)
+	clientStore.set(client);
 }
 
 export function setWpUrl(wpUrl: string): void {

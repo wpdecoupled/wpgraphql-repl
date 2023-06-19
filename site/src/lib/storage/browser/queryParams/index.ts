@@ -1,4 +1,4 @@
-export { default as SearchParamsStorageProvider } from "./SearchParamsStorageProvider.svelte"
+export { default as SearchParamsStorageProvider } from './SearchParamsStorageProvider.svelte';
 
 import type { PlaygroundContext } from '$lib/repl/state';
 import { writable, type Readable } from 'svelte/store';

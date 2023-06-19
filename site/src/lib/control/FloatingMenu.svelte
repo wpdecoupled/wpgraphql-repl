@@ -2,10 +2,7 @@
 	import MenuSurface from '@smui/menu-surface';
 	import ReplMenuPanel from './panels/Menu.svelte';
 
-	import {
-		ToggleMobileMenu,
-		isMobileMenuOpen,
-	} from './components/buttons';
+	import { ToggleMobileMenu, isMobileMenuOpen } from './components/buttons';
 	let menu;
 
 	function toggleMenu() {
@@ -23,8 +20,7 @@
 		anchorCorner="BOTTOM_START"
 		style="box-shadow: none; overflow:visible"
 	>
-
-		<ReplMenuPanel on:click={toggleMenu} isMobile/>
+		<ReplMenuPanel on:click={toggleMenu} isMobile />
 	</MenuSurface>
 </aside>
 
@@ -42,6 +38,4 @@
 			display: none;
 		}
 	}
-
-
 </style>

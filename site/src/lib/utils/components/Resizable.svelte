@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { classNames } from '$lib/utils/string';
 
-	export let horizontal: boolean = false;
-	export let vertical: boolean = false;
-	export let as: string = 'div';
-	export let minimumWidth: number = 300;
+	export let horizontal = false;
+	export let vertical = false;
+	export let as = 'div';
+	export let minimumWidth = 300;
 	let { class: className } = $$props;
 
 	let resizeEl: HTMLElement;

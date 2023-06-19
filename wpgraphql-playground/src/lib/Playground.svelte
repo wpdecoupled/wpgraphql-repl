@@ -19,7 +19,6 @@ const dispatch = createEventDispatcher();
 	$: if (debug) {
 		console.log("new playground url: ", $wpUrl)
 		console.log("new client", $client)
-
 	}
 
 	$: dispatch('newUrl', $wpUrl)

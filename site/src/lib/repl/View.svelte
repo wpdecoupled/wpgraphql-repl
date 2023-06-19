@@ -17,7 +17,6 @@
 	function handleNewUrl(event: CustomEvent<string>) {
 		$wpUrl = event.detail;
 	}
-
 </script>
 
 <main>

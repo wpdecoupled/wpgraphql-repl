@@ -22,7 +22,7 @@
 		label="WordPress URL"
 		bind:value={workingUrl}
 		on:keydown={(e) => {
-			// @ts-expect-error
+			// @ts-expect-error - Svelte doesn't know about key for some reason
 			if (e.key === 'Enter') {
 				if ($client !== null) {
 					$client.goTo(workingUrl);

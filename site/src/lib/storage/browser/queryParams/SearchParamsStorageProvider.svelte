@@ -10,9 +10,7 @@
 		REPL_NAME_PARAM,
 	} from '$lib/storage/browser/queryParams';
 
-	import {
-		getPlaygroundContext,
-	} from "$lib/repl/state"
+	import { getPlaygroundContext } from '$lib/repl/state';
 
 	const {
 		config: {

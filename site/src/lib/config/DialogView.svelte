@@ -3,10 +3,6 @@
 
 	import { isMobileConfigOpen, CloseMobileConfig } from '$lib/control/components/buttons';
 	import PlaygroundConfig from './Panel.svelte';
-
-	function closeConfig() {
-		$isMobileConfigOpen = false;
-	}
 </script>
 
 <div id="mobile-playground-config">

@@ -7,7 +7,7 @@
 		OpenMobileConfig,
 	} from '../components/buttons';
 
-	export let isMobile: boolean = false;
+	export let isMobile = false;
 </script>
 
 <section class="menu" class:mobile={isMobile}>

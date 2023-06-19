@@ -15,11 +15,11 @@
 
 	$: handleDownload = async () => {
 		const prepToast = toast.loading('Preparing Zip for Download...', {
-			next: .5,
+			next: 0.5,
 			duration: 2000,
 		});
 
-		toast.notify("testing")
+		toast.notify('testing');
 		const file = await zipEntireSite($client);
 		prepToast.update({ next: 0.5 });
 

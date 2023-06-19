@@ -8,7 +8,7 @@ export default defineConfig({
 	assetsInclude: ['**/*.php'],
 	resolve: {
 		build: {
-			sourcemap: true
+			sourcemap: true,
 		},
 	},
 });

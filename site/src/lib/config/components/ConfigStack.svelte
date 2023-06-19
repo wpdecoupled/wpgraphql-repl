@@ -34,9 +34,6 @@
 				class="stack-item"
 				variant="filled"
 				bind:value={$php}
-				on:change={(e) => {
-					console.log('test');
-				}}
 				label="PHP Version"
 			>
 				{#each SupportedPHPVersionsList as version}
