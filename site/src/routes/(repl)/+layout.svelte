@@ -8,7 +8,9 @@
 	import { PlaygroundProvider } from '$lib/repl/state';
 
 	import './layout.css';
+
 	inject({ mode: dev ? 'development' : 'production' });
+
 </script>
 
 <PlaygroundProvider>

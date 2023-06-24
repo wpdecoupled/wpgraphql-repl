@@ -1,12 +1,6 @@
-import { redirect } from '@sveltejs/kit';
 
-import { StatusCodes } from 'http-status-codes';
+import { queryParamsProvider } from '$lib/storage/browser/queryParams/index.js';
 
-import { getAllPlaygroundParams, hasAllPlaygroundParams } from '$lib/storage/browser/queryParams';
-
-export function load({ url }) {
-	if (!hasAllPlaygroundParams(url)) {
-		const newURL = getAllPlaygroundParams(url);
-		throw redirect(StatusCodes.TEMPORARY_REDIRECT, newURL.toString());
-	}
+export function load(event) {
+	return queryParamsProvider.routeHandler(event);
 }

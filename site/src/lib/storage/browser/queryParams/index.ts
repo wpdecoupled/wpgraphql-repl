@@ -1,140 +1,61 @@
-export { default as SearchParamsStorageProvider } from './SearchParamsStorageProvider.svelte';
+import { redirect } from '@sveltejs/kit';
 
-import type { PlaygroundContext } from '$lib/repl/state';
-import { writable, type Readable } from 'svelte/store';
+import { browser } from '$app/environment';
+import { goto } from '$app/navigation';
 
-import {
-	client as clientStore,
-	isSupportedPHPVersion,
-	isSupportedWordPressVersion,
-	PLAYGROUND_WP_DEFAULT,
-	PLAYGROUND_URL_DEFAULT,
-	PLAYGROUND_PHP_DEFAULT,
-} from 'wpgraphql-playground';
+import { StatusCodes } from 'http-status-codes';
 
-import type { SupportedPHPVersions, SupportedWordPressVersions } from 'wpgraphql-playground';
+import { buildContext, getAllPlaygroundParams, hasAllPlaygroundParams } from './utils';
 
-/**
- * WP URL Stuff
- */
+import type { StorageProvider } from "../types";
+import { PLAYGROUND_PHP_VERSION_KEY, PLAYGROUND_URL_KEY, PLAYGROUND_WP_VERSION_KEY, REPL_NAME_KEY } from '../consts';
 
-export const PLAYGROUND_URL_PARAM = 'playground_url';
+export const queryParamsProvider: StorageProvider = {
+	routeHandler: ({ url }) => {
+		if (!hasAllPlaygroundParams(url)) {
+			const newURL = getAllPlaygroundParams(url);
+			throw redirect(StatusCodes.TEMPORARY_REDIRECT, newURL.toString());
+		}
 
-function getPlaygroundUrl(url: URL) {
-	const playgroundUrl = url.searchParams.get(PLAYGROUND_URL_PARAM);
-
-	if (!playgroundUrl) {
-		return PLAYGROUND_URL_DEFAULT;
-	}
-
-	return playgroundUrl;
-}
-
-/**
- * WP Version Stuff
- */
-export const PLAYGROUND_WP_VERSION_PARAM = 'wp';
-
-function getWordPressVersion(url: URL): SupportedWordPressVersions {
-	const wpVersion = url.searchParams.get(PLAYGROUND_WP_VERSION_PARAM);
-
-	if (wpVersion && isSupportedWordPressVersion(wpVersion)) {
-		return wpVersion;
-	}
-
-	return PLAYGROUND_WP_DEFAULT;
-}
-
-/**
- * PHP Version Stuff
- */
-
-export const PLAYGROUND_PHP_VERSION_PARAM = 'php';
-
-function getPHPVersion(url: URL): SupportedPHPVersions {
-	const phpVersion = url.searchParams.get(PLAYGROUND_PHP_VERSION_PARAM);
-
-	if (phpVersion && isSupportedPHPVersion(phpVersion)) {
-		return phpVersion;
-	}
-
-	return PLAYGROUND_PHP_DEFAULT;
-}
-
-/**
- * WP Name Stuff
- */
-export const REPL_NAME_PARAM = 'name';
-export const REPL_NAME_DEFAULT = 'Hello World';
-
-export function getReplName(url: URL) {
-	return url.searchParams.get(REPL_NAME_PARAM) || REPL_NAME_DEFAULT;
-}
-
-/**
- * Query Param Utils
- */
-type ParamsConfig = {
-	[key: string]: {
-		init: (url: URL) => string;
-		fetch: (context: PlaygroundContext) => Readable<string>;
-	};
-};
-
-export const PLAYGROUND_PARAMS: ParamsConfig = {
-	[PLAYGROUND_WP_VERSION_PARAM]: {
-		init: getWordPressVersion,
-		fetch: (context) => context.config.stackVersions.wp,
+		return {
+			buildContext: () => {
+				return buildContext(url)
+			},
+		}
 	},
-	[PLAYGROUND_PHP_VERSION_PARAM]: {
-		init: getPHPVersion,
-		fetch: (context) => context.config.stackVersions.php,
-	},
-	[PLAYGROUND_URL_PARAM]: {
-		init: getPlaygroundUrl,
-		fetch: (context) => context.config.wpUrl,
-	},
-	[REPL_NAME_PARAM]: {
-		init: getReplName,
-		fetch: (context) => context.config.name,
-	},
-};
+	storageProvider: (page, context) => {
+		const {
+			config: {
+				wpUrl,
+				name,
+				stackVersions: { wp, php },
+			},
+		} = context;
 
-//Checks if all required params are present in URL
-export function hasAllPlaygroundParams(url: URL) {
-	for (const param of Object.keys(PLAYGROUND_PARAMS)) {
-		if (!url.searchParams.has(param)) {
-			return false;
+		if (browser) {
+			const newUrl = new URL(page.url);
+
+			newUrl.searchParams.set(PLAYGROUND_WP_VERSION_KEY, $wp);
+			newUrl.searchParams.set(PLAYGROUND_PHP_VERSION_KEY, $php);
+			newUrl.searchParams.set(PLAYGROUND_URL_KEY, $wpUrl);
+
+			goto(newUrl, {
+				noScroll: true,
+				keepFocus: true,
+			});
+		}
+
+		// Same except does NOT add a history entry
+		if (browser) {
+			const newUrl = new URL(page.url);
+
+			newUrl.searchParams.set(REPL_NAME_KEY, name);
+
+			goto(newUrl, {
+				noScroll: true,
+				keepFocus: true,
+				replaceState: true,
+			});
 		}
 	}
-
-	return true;
-}
-
-//Reads from URL and sets default values for missing params
-export function getAllPlaygroundParams(url: URL) {
-	const newURL = new URL(url);
-
-	for (const [param, config] of Object.entries(PLAYGROUND_PARAMS)) {
-		newURL.searchParams.set(param, config.init(url));
-	}
-
-	return newURL;
-}
-
-export function buildContext(url: URL) {
-	const playgroundWPVersion = writable<SupportedWordPressVersions>(getWordPressVersion(url));
-	const playgroundPHPVersion = writable<SupportedPHPVersions>(getPHPVersion(url));
-
-	return {
-		client: clientStore,
-		config: {
-			wpUrl: writable<string>(getPlaygroundUrl(url)),
-			stackVersions: {
-				wp: playgroundWPVersion,
-				php: playgroundPHPVersion,
-			},
-			name: writable<string>(getReplName(url)),
-		},
-	};
-}
+};
