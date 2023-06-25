@@ -11,19 +11,18 @@
 	$: ({ name, client } = $replState);
 
 	$: handleDownload = async () => {
-		const prepToast = toast.loading('Preparing Zip for Download...', {
+		const prepToast = toast.loading('Preparing Zip for Download.', {
 			next: 0.5,
 			duration: 2000,
 		});
 
-		toast.notify('testing');
 		const file = await zipEntireSite(client);
-		prepToast.update({ next: 0.5 });
+		prepToast.update({ next: 0.75 });
 
 		const fileUrl = URL.createObjectURL(file);
 		const fileName = `${slugify(name)}.zip`;
 		const a = document.createElement('a');
-		prepToast.complete({ msg: 'Downloading zip!' });
+		prepToast.complete({ msg: 'Downloading...' });
 
 		a.href = fileUrl;
 		a.download = fileName || 'download';
@@ -38,6 +37,7 @@
 	{type}
 	icon="download"
 	tooltip="Download WP Site"
+	disabled={!client}
 	on:click
 	on:click={handleDownload}
 	{...$$restProps}
