@@ -1,30 +1,20 @@
-import { getContext, setContext } from 'svelte';
+// import { getContext, setContext } from 'svelte';
 
-import type { Writable } from 'svelte/store';
-import type { client as ClientStore, SupportedPHPVersions, SupportedWordPressVersions } from 'wpgraphql-playground';
+// import type { ReplContext } from './stores';
 
-export { default as PlaygroundProvider } from './PlaygroundProvider.svelte';
+export { type ReplState, type ReplStateValue, replState } from './stores';
+// export { default as PlaygroundProvider } from './PlaygroundProvider.svelte';
+export * from './actions';
+export * from './consts';
 
-//TODO: rewrite this as a derived store with values insead of stores, and update functions for each of the values.
-export type PlaygroundContext = {
-	client: typeof ClientStore;
-	config: {
-		wpUrl: Writable<string>;
-		stackVersions: {
-			wp: Writable<SupportedWordPressVersions>;
-			php: Writable<SupportedPHPVersions>;
-		}
-		name: Writable<string>;
-	}
-};
-export const CONTEXT_KEY = Symbol('wp-playground-context');
+// export const CONTEXT_KEY = Symbol('wp-playground-context');
 
-//Creates initial context from URL
-export function setPlaygroundContext(builder: () => PlaygroundContext) {
-	setContext<PlaygroundContext>(CONTEXT_KEY, builder());
-}
+// //Creates initial context from URL
+// export function setPlaygroundContext(builder: () => ReplContext) {
+// 	setContext<ReplContext>(CONTEXT_KEY, builder());
+// }
 
-//Returns current context
-export function getPlaygroundContext(): PlaygroundContext {
-	return getContext(CONTEXT_KEY);
-}
+// //Returns current context
+// export function getPlaygroundContext(): ReplContext {
+// 	return getContext(CONTEXT_KEY);
+// }

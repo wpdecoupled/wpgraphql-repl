@@ -1,23 +1,19 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import * as toast from '$lib/utils/toast';
-	import { getPlaygroundContext } from '$lib/repl/state';
+	import { replState } from '$lib/repl/state';
 
-	const {
-		config: {
-			stackVersions: { wp, php },
-		},
-	} = getPlaygroundContext();
+	$: ({ wpVersion, phpVersion } = $replState);
 
 	const config = {
 		duration: 8000,
 	};
 
 	$: if (browser) {
-		toast.notify(`Building with WP v${$wp}`, config);
+		toast.notify(`Building with WP v${wpVersion}`, config);
 	}
 
 	$: if (browser) {
-		toast.notify(`Building with PHP v${$php}`, config);
+		toast.notify(`Building with PHP v${phpVersion}`, config);
 	}
 </script>

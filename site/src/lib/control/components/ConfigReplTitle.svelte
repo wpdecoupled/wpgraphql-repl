@@ -1,14 +1,14 @@
 <script lang="ts">
 	import Textfield from '@smui/textfield';
 
-	import { getPlaygroundContext } from '$lib/repl/state';
+	import { replState, setReplName } from '$lib/repl/state';
 
-	const {
-		config: { name },
-	} = getPlaygroundContext();
+	let name = $replState.name;
+
+	$: setReplName(name);
 </script>
 
-<Textfield class="name-entry" type="text" variant="standard" bind:value={$name} />
+<Textfield class="name-entry" type="text" variant="standard" bind:value={name} />
 
 <style>
 	:global(.name-entry) {

@@ -3,15 +3,12 @@
 	import slugify from 'slugify';
 	import * as toast from '$lib/utils/toast';
 
-	import { getPlaygroundContext } from '$lib/repl/state';
+	import { replState } from '$lib/repl/state';
 	import BaseButton, { type ButtonType } from './BaseButton.svelte';
 
 	export let type: ButtonType = 'desktop';
 
-	const {
-		config: { name },
-		client,
-	} = getPlaygroundContext();
+	$: ({ name, client } = $replState);
 
 	$: handleDownload = async () => {
 		const prepToast = toast.loading('Preparing Zip for Download...', {
@@ -20,11 +17,11 @@
 		});
 
 		toast.notify('testing');
-		const file = await zipEntireSite($client);
+		const file = await zipEntireSite(client);
 		prepToast.update({ next: 0.5 });
 
 		const fileUrl = URL.createObjectURL(file);
-		const fileName = `${slugify($name)}.zip`;
+		const fileName = `${slugify(name)}.zip`;
 		const a = document.createElement('a');
 		prepToast.complete({ msg: 'Downloading zip!' });
 

@@ -1,21 +1,15 @@
 <script lang="ts">
 	import { Playground } from 'wpgraphql-playground';
-	import { getPlaygroundContext } from '$lib/repl/state';
+	import { replState, setPlaygroundUrl } from '$lib/repl/state';
 	import PlaygroundSidebarConfig from '$lib/config/SidebarView.svelte';
 	import { Header, Footer } from '$lib/control/panels';
 	import ReplMobileMenu from '$lib/control/FloatingMenu.svelte';
 	import PlaygroundMobileConfig from '$lib/config/DialogView.svelte';
 
-	const {
-		// client,
-		config: {
-			wpUrl,
-			stackVersions: { wp, php },
-		},
-	} = getPlaygroundContext();
+	$: ({ wpUrl, wpVersion, phpVersion } = $replState);
 
 	function handleNewUrl(event: CustomEvent<string>) {
-		$wpUrl = event.detail;
+		setPlaygroundUrl(event.detail);
 	}
 </script>
 
@@ -38,7 +32,7 @@
 	</PlaygroundSidebarConfig>
 
 	<section id="playground">
-		<Playground on:newUrl={handleNewUrl} wpVersion={$wp} phpVersion={$php} initialUrl={$wpUrl} />
+		<Playground on:newUrl={handleNewUrl} {wpVersion} {phpVersion} initialUrl={wpUrl} />
 	</section>
 </main>
 <PlaygroundMobileConfig />

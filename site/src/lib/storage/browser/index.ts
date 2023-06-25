@@ -1,4 +1,5 @@
 
 // export * as localStorage from './localStorage';
-export * as queryParamsProvider from './queryParams';
+export { default as queryParamsProvider } from './queryParams';
 export * from './types';
+export * from './consts'
