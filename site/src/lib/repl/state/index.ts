@@ -1,17 +1,20 @@
-import { getContext, setContext } from 'svelte';
-import { buildContext } from '$lib/storage/browser/queryParams';
+// import { getContext, setContext } from 'svelte';
 
-export { default as PlaygroundProvider } from './PlaygroundProvider.svelte';
+// import type { ReplContext } from './stores';
 
-export type PlaygroundContext = ReturnType<typeof buildContext>;
-export const CONTEXT_KEY = Symbol('wp-playground-context');
+export { type ReplState, type ReplStateValue, replState } from './stores';
+// export { default as PlaygroundProvider } from './PlaygroundProvider.svelte';
+export * from './actions';
+export * from './consts';
 
-//Creates initial context from URL
-export function setPlaygroundContext(url: URL) {
-	setContext<PlaygroundContext>(CONTEXT_KEY, buildContext(url));
-}
+// export const CONTEXT_KEY = Symbol('wp-playground-context');
 
-//Returns current context
-export function getPlaygroundContext(): PlaygroundContext {
-	return getContext(CONTEXT_KEY);
-}
+// //Creates initial context from URL
+// export function setPlaygroundContext(builder: () => ReplContext) {
+// 	setContext<ReplContext>(CONTEXT_KEY, builder());
+// }
+
+// //Returns current context
+// export function getPlaygroundContext(): ReplContext {
+// 	return getContext(CONTEXT_KEY);
+// }

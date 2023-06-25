@@ -2,17 +2,23 @@
 	import { Panel, Header, Content } from '@smui-extra/accordion';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import Select, { Option } from '@smui/select';
-	import { getPlaygroundContext } from '$lib/repl/state';
+	import { replState, setWordPressVersion, setPHPVersion } from '$lib/repl/state';
 
 	import { SupportedWordPressVersionsList, SupportedPHPVersionsList } from 'wpgraphql-playground';
 
-	const {
-		config: {
-			stackVersions: { wp, php },
-		},
-	} = getPlaygroundContext();
-
 	let stackPanel = false;
+
+	let wpVersion = $replState.wpVersion;
+	let phpVersion = $replState.phpVersion;
+	$: hasClient = Boolean($replState.client);
+
+	$: {
+		setPHPVersion(phpVersion);
+	}
+
+	$: {
+		setWordPressVersion(wpVersion);
+	}
 </script>
 
 <Panel bind:open={stackPanel}>
@@ -25,17 +31,12 @@
 	</Header>
 	<Content>
 		<div class="select-stack">
-			<Select class="stack-item" variant="filled" bind:value={$wp} label="WordPress Version">
+			<Select class="stack-item" variant="filled" bind:value={wpVersion} label="WordPress Version" disabled={!hasClient}>
 				{#each SupportedWordPressVersionsList as version}
 					<Option value={version}>{version}</Option>
 				{/each}
 			</Select>
-			<Select
-				class="stack-item"
-				variant="filled"
-				bind:value={$php}
-				label="PHP Version"
-			>
+			<Select class="stack-item" variant="filled" bind:value={phpVersion} label="PHP Version" disabled={!hasClient}>
 				{#each SupportedPHPVersionsList as version}
 					<Option value={version}>{version}</Option>
 				{/each}

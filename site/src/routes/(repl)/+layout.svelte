@@ -1,22 +1,31 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
-	import { inject } from '@vercel/analytics';
+	import { error } from '@sveltejs/kit';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
+	import { inject } from '@vercel/analytics';
+
+	import { page } from '$app/stores';
+	import { dev } from '$app/environment';
+	import { loadState } from '$lib/repl/state';
 
 	import { Seo } from '$lib/seo';
 	import { ConfigToastProvider } from '$lib/config/components';
-	import { PlaygroundProvider } from '$lib/repl/state';
 
 	import './layout.css';
+
 	inject({ mode: dev ? 'development' : 'production' });
+
+	$: if($page.data?.state) {
+		loadState($page.data?.state);
+	} else {
+		throw error(500, 'No state found in page data')
+	}
+
 </script>
 
-<PlaygroundProvider>
-	<ConfigToastProvider />
-	<Seo />
-	<slot />
-	<SvelteToast />
-</PlaygroundProvider>
+<ConfigToastProvider />
+<Seo />
+<slot />
+<SvelteToast />
 
 <style>
 	:root {

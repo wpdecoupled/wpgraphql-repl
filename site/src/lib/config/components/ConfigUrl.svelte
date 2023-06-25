@@ -4,15 +4,14 @@
 	import Card from '@smui/card';
 
 	import * as toast from '$lib/utils/toast';
-	import { getPlaygroundContext } from '$lib/repl/state';
+	import { replState } from '$lib/repl/state';
 
-	const {
-		config: { wpUrl },
-		client,
-	} = getPlaygroundContext();
+	$: ({ wpUrl, client } = $replState);
+
+	$: hasClient = Boolean(client);
 
 	// We don't want the URL to update till after the user has finished typing and pressed enter to trigger the navigation.
-	$: workingUrl = $wpUrl;
+	$: workingUrl = wpUrl;
 </script>
 
 <Card padded>
@@ -20,12 +19,13 @@
 		type="url"
 		variant="filled"
 		label="WordPress URL"
+		disabled={!hasClient}
 		bind:value={workingUrl}
 		on:keydown={(e) => {
 			// @ts-expect-error - Svelte doesn't know about key for some reason
 			if (e.key === 'Enter') {
-				if ($client !== null) {
-					$client.goTo(workingUrl);
+				if (client !== null) {
+					client.goTo(workingUrl);
 					toast.notify('Navigating to URL');
 				} else {
 					throw Error('Client is not ready');

@@ -39,14 +39,15 @@ export function loading(message: string, config?: SvelteToastOptions) {
 		update: (opts: SvelteToastOptions) => toast.set(id, opts),
 		complete: (opts?: SvelteToastOptions) =>
 			toast.set(
+				id,
 				extend(
-					{
+					mergeDefaultToastConfig({
 						dismissable: true,
 						duration: 3000,
 						next: 1,
-					},
+					}),
 					opts
 				)
-			),
+			)
 	};
 }
