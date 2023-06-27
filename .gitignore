@@ -9,6 +9,7 @@ build
 .svelte-kit
 .vercel
 package
+dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
