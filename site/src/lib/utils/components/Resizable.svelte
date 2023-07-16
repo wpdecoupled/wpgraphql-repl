@@ -62,13 +62,26 @@
 
 <svelte:element this={as} bind:this={resizeEl} class={classNames('resizable', className)}>
 	<slot />
+	<!-- These are not very accessible. Tabindex=0 makes them selectable but would need to add arrow key handlers -->
 	{#if horizontal}
-		<div class="material-icons resizer resize-r" on:mousedown={mouseDownHandler}>
+		<div
+			role="separator"
+			aria-orientation="horizontal"
+			class="material-icons resizer resize-r"
+			on:mousedown={mouseDownHandler}
+		>
 			drag_indicator
 		</div>
 	{/if}
 	{#if vertical}
-		<div class="resizer resize-b" on:mousedown={mouseDownHandler}>drag_handle</div>
+		<div
+			role="separator"
+			aria-orientation="vertical"
+			class="resizer resize-b"
+			on:mousedown={mouseDownHandler}
+		>
+			drag_handle
+		</div>
 	{/if}
 </svelte:element>
 
