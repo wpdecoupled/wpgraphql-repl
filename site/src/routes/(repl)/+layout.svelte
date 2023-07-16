@@ -14,12 +14,11 @@
 
 	inject({ mode: dev ? 'development' : 'production' });
 
-	$: if($page.data?.state) {
+	$: if ($page.data?.state) {
 		loadState($page.data?.state);
 	} else {
-		throw error(500, 'No state found in page data')
+		throw error(500, 'No state found in page data');
 	}
-
 </script>
 
 <ConfigToastProvider />

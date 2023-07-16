@@ -1,6 +1,20 @@
 // Actions to set values in the stores
-import { isSupportedPHPVersion, isSupportedWordPressVersion, PLAYGROUND_PHP_DEFAULT, PLAYGROUND_URL_DEFAULT, PLAYGROUND_WP_DEFAULT, type SupportedPHPVersions, type SupportedWordPressVersions } from 'wpgraphql-playground';
-import { PLAYGROUND_PHP_VERSION_KEY, PLAYGROUND_URL_KEY, PLAYGROUND_WP_VERSION_KEY, REPL_NAME_KEY, type ValidStorageKey } from '$lib/storage/browser';
+import {
+	isSupportedPHPVersion,
+	isSupportedWordPressVersion,
+	PLAYGROUND_PHP_DEFAULT,
+	PLAYGROUND_URL_DEFAULT,
+	PLAYGROUND_WP_DEFAULT,
+	type SupportedPHPVersions,
+	type SupportedWordPressVersions,
+} from 'wpgraphql-playground';
+import {
+	PLAYGROUND_PHP_VERSION_KEY,
+	PLAYGROUND_URL_KEY,
+	PLAYGROUND_WP_VERSION_KEY,
+	REPL_NAME_KEY,
+	type ValidStorageKey,
+} from '$lib/storage/browser';
 import { wpUrl, wpVersion, phpVersion, name } from './stores';
 import { REPL_NAME_DEFAULT } from './consts';
 
@@ -19,7 +33,6 @@ export function setPHPVersion(version: SupportedPHPVersions) {
 export function setReplName(replName: string) {
 	name.set(replName);
 }
-
 
 export type StateFromLoad = {
 	[key in ValidStorageKey]?: string;

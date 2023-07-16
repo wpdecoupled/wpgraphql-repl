@@ -48,6 +48,6 @@ export function loading(message: string, config?: SvelteToastOptions) {
 					}),
 					opts
 				)
-			)
+			),
 	};
 }
