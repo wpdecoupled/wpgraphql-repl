@@ -6,7 +6,13 @@ import { goto } from '$app/navigation';
 import type { StateFromLoad } from '$lib/repl/state';
 
 import type { StorageProvider } from '../types';
-import { isValidStorageKey, PLAYGROUND_PHP_VERSION_KEY, PLAYGROUND_URL_KEY, PLAYGROUND_WP_VERSION_KEY, REPL_NAME_KEY } from '../consts';
+import {
+	isValidStorageKey,
+	PLAYGROUND_PHP_VERSION_KEY,
+	PLAYGROUND_URL_KEY,
+	PLAYGROUND_WP_VERSION_KEY,
+	REPL_NAME_KEY,
+} from '../consts';
 
 const queryParamsProvider: StorageProvider = {
 	routeHandler: ({ url }) => {
@@ -20,15 +26,10 @@ const queryParamsProvider: StorageProvider = {
 
 		return {
 			state,
-		}
+		};
 	},
 	updateStorageFromState: (page, state) => {
-		const {
-			wpUrl,
-			name,
-			wpVersion,
-			phpVersion,
-		} = state;
+		const { wpUrl, name, wpVersion, phpVersion } = state;
 
 		if (browser) {
 			const newUrl = new URL(page.url);
@@ -58,6 +59,6 @@ const queryParamsProvider: StorageProvider = {
 				replaceState: !addHistory,
 			});
 		}
-	}
+	},
 };
 export default queryParamsProvider;
