@@ -40,8 +40,8 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 					step: 'installPlugin',
 					pluginZipFile: {
 						resource: 'url',
-						url: "/wpgraphql-plugin-repl.zip",
-					},
+						url: '/wpgraphql-plugin-repl.zip'
+					}
 				},
 				{
 					step: 'writeFile',

@@ -31,7 +31,6 @@ const queryParamsProvider: StorageProvider = {
 		};
 	},
 	updateStorageFromState: (page, state) => {
-
 		if (browser) {
 			const newUrl = new URL(page.url);
 			let addHistory = false;

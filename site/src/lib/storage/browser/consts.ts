@@ -1,6 +1,12 @@
 import { z } from 'zod';
 import type { ValidStorageKey } from './types';
-import { PLAYGROUND_PHP_DEFAULT, PLAYGROUND_URL_DEFAULT, PLAYGROUND_WP_DEFAULT, SupportedPHPVersionsList, SupportedWordPressVersionsList } from 'wpgraphql-playground';
+import {
+	PLAYGROUND_PHP_DEFAULT,
+	PLAYGROUND_URL_DEFAULT,
+	PLAYGROUND_WP_DEFAULT,
+	SupportedPHPVersionsList,
+	SupportedWordPressVersionsList,
+} from 'wpgraphql-playground';
 import { REPL_NAME_DEFAULT } from '$lib/repl/state';
 
 export const PLAYGROUND_URL_KEY = 'playground_url';
@@ -17,7 +23,7 @@ export const ConfigValidator = z.object({
 	REPL_NAME_KEY: z.string().default(REPL_NAME_DEFAULT),
 	GRAPHIQL_QUERY_KEY: z.string().default(''),
 	GRAPHIQL_VARIABLES_KEY: z.string().default(''),
- })
+});
 
 export const ValidStorageKeys = Object.keys(ConfigValidator);
 

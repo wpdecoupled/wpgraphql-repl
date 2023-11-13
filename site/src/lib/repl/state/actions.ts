@@ -28,13 +28,9 @@ export type StateFromLoad = {
 };
 
 export function loadState(state: StateFromLoad) {
-
-
 	const config = ConfigValidator.parse(state);
 
 	replState.update((current) => {
-
-		return { ...current, config }
-
+		return { ...current, config };
 	});
 }
