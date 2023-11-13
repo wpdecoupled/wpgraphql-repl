@@ -2,7 +2,6 @@ import type { Blueprint } from '@wp-playground/client';
 import extend from 'just-extend';
 
 import phpDebug from './php/debug.php?raw';
-
 import { PLAYGROUND_WP_DEFAULT, PLAYGROUND_PHP_DEFAULT, PLAYGROUND_URL_DEFAULT } from './consts';
 
 export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blueprint {
@@ -36,6 +35,18 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 						resource: 'wordpress.org/plugins',
 						slug: 'debug-info'
 					}
+				},
+				{
+					step: 'installPlugin',
+					pluginZipFile: {
+						resource: 'url',
+						url: "/wpgraphql-plugin-repl.zip",
+					},
+				},
+				{
+					step: 'writeFile',
+					path: '/wordpress/debug.php',
+					data: phpDebug
 				},
 				{
 					step: 'writeFile',

@@ -7,6 +7,8 @@ import type { StateFromLoad } from '$lib/repl/state';
 
 import type { StorageProvider } from '../types';
 import {
+	GRAPHIQL_QUERY_KEY,
+	GRAPHIQL_VARIABLES_KEY,
 	isValidStorageKey,
 	PLAYGROUND_PHP_VERSION_KEY,
 	PLAYGROUND_URL_KEY,
@@ -29,7 +31,6 @@ const queryParamsProvider: StorageProvider = {
 		};
 	},
 	updateStorageFromState: (page, state) => {
-		const { wpUrl, name, wpVersion, phpVersion } = state;
 
 		if (browser) {
 			const newUrl = new URL(page.url);
@@ -51,6 +52,14 @@ const queryParamsProvider: StorageProvider = {
 
 			if (newUrl.searchParams.get(REPL_NAME_KEY) !== name) {
 				newUrl.searchParams.set(REPL_NAME_KEY, name);
+			}
+
+			if (newUrl.searchParams.get(GRAPHIQL_QUERY_KEY) !== graphiqlQuery) {
+				newUrl.searchParams.set(GRAPHIQL_QUERY_KEY, graphiqlQuery);
+			}
+
+			if (newUrl.searchParams.get(GRAPHIQL_VARIABLES_KEY) !== graphiqlVariables) {
+				newUrl.searchParams.set(GRAPHIQL_VARIABLES_KEY, graphiqlVariables);
 			}
 
 			goto(newUrl, {

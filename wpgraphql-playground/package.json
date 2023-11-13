@@ -49,6 +49,7 @@
 	"type": "module",
 	"dependencies": {
 		"@wp-playground/client": "^0.1.61",
-		"just-extend": "^6.2.0"
+		"just-extend": "^6.2.0",
+		"wpgraphql-plugin-repl": "*"
 	}
 }
