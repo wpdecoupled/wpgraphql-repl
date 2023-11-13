@@ -8,8 +8,8 @@ export const PLAYGROUND_REMOTE_API = 'https://playground.wordpress.net/remote.ht
  * WP Version Stuff
  */
 
-export const SupportedWordPressVersionsList = ['5.9', '6.0', '6.1', '6.2'] as const;
-export const PLAYGROUND_WP_DEFAULT: SupportedWordPressVersions = '6.2';
+export const SupportedWordPressVersionsList = ['5.9', '6.0', '6.1', '6.2', '6.3', '6.4'] as const;
+export const PLAYGROUND_WP_DEFAULT: SupportedWordPressVersions = '6.4';
 
 /**
  * PHP Version Stuff
