@@ -3,12 +3,12 @@
 	import slugify from 'slugify';
 	import * as toast from '$lib/utils/toast';
 
-	import { replState } from '$lib/repl/state';
+	import { repl_state } from '$lib/repl/state';
 	import BaseButton, { type ButtonType } from './BaseButton.svelte';
 
 	export let type: ButtonType = 'desktop';
 
-	$: ({ name, client } = $replState);
+	$: ({ name, client } = $repl_state);
 
 	$: handleDownload = async () => {
 		const prepToast = toast.loading('Preparing Zip for Download.', {

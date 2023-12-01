@@ -1,11 +1,14 @@
 <script lang="ts">
 	import Textfield from '@smui/textfield';
 
-	import { replState, setReplName } from '$lib/repl/state';
+	import { repl_state } from '$lib/repl/state';
 
-	let name = $replState.name;
+	let name = $repl_state.name;
 
-	$: setReplName(name);
+	$: repl_state.dispatch({
+		type: 'update_name',
+		value: name,
+	});
 </script>
 
 <Textfield class="name-entry" type="text" variant="standard" bind:value={name} />

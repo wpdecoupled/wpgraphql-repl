@@ -2,9 +2,8 @@
 
 // import type { ReplContext } from './stores';
 
-export { type ReplState, type ReplStateValue, replState } from './stores';
+export { type ReplStateValue, repl_state } from './stores';
 // export { default as PlaygroundProvider } from './PlaygroundProvider.svelte';
-export * from './actions';
 export * from './consts';
 
 // export const CONTEXT_KEY = Symbol('wp-playground-context');
