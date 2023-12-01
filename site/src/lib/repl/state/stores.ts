@@ -24,6 +24,8 @@ export type ReplStateValue = {
 	url: string;
 	wp_version: SupportedWordPressVersions;
 	php_version: SupportedPHPVersions;
+	graphiql_query?: string;
+	graphiql_variables?: string;
 };
 
 const default_repl_state: ReplStateValue = {
@@ -48,6 +50,12 @@ const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 			return { ...state, php_version: action?.value };
 		case 'update-name':
 			return { ...state, name: action?.value };
+		case 'set-graphiql-context':
+			return {
+				...state,
+				graphiql_query: action?.value.query,
+				graphiql_variables: action?.value.variables,
+			};
 		default:
 			return state;
 	}

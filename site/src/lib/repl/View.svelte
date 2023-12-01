@@ -21,6 +21,13 @@
 			value: event.detail
 		})
 	}
+
+	function handleNewGraphiQLContext(event: CustomEvent<{ query: string; variables: string }>) {
+		repl_state.dispatch({
+			type: 'set-graphiql-context',
+			value: event.detail
+		})
+	}
 </script>
 
 <main>
@@ -42,7 +49,7 @@
 	</PlaygroundSidebarConfig>
 
 	<section id="playground">
-		<Playground on:newUrl={handleNewUrl} on:newClient={handleNewClient} wpVersion={wp_version} phpVersion={php_version} initialUrl={url} />
+		<Playground on:newGraphiQLContext={handleNewGraphiQLContext} on:newUrl={handleNewUrl} on:newClient={handleNewClient} wpVersion={wp_version} phpVersion={php_version} initialUrl={url} />
 	</section>
 </main>
 <PlaygroundMobileConfig />

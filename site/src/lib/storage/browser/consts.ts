@@ -4,6 +4,9 @@ export const PLAYGROUND_URL_KEY = 'playground_url';
 export const PLAYGROUND_WP_VERSION_KEY = 'wp';
 export const PLAYGROUND_PHP_VERSION_KEY = 'php';
 export const REPL_NAME_KEY = 'name';
+export const GRAPHIQL_QUERY_KEY = 'query';
+export const GRAPHIQL_VARIABLES_KEY = 'variables';
+
 
 export const ValidStorageKeys = [
 	PLAYGROUND_PHP_VERSION_KEY,

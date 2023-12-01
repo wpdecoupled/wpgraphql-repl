@@ -11,6 +11,8 @@ import {
 	PLAYGROUND_URL_KEY,
 	PLAYGROUND_WP_VERSION_KEY,
 	REPL_NAME_KEY,
+	GRAPHIQL_QUERY_KEY,
+	GRAPHIQL_VARIABLES_KEY,
 } from '../consts';
 
 type StateFromLoad = {
@@ -35,7 +37,7 @@ const queryParamsProvider: StorageProvider = {
 		};
 	},
 	updateStorageFromState: (page, state) => {
-		const { url, name, wp_version, php_version } = state;
+		const { url, name, wp_version, php_version, graphiql_query, graphiql_variables } = state;
 
 		if (browser) {
 			const newUrl = new URL(page.url);
@@ -57,6 +59,14 @@ const queryParamsProvider: StorageProvider = {
 
 			if (newUrl.searchParams.get(REPL_NAME_KEY) !== name) {
 				newUrl.searchParams.set(REPL_NAME_KEY, name);
+			}
+
+			if (newUrl.searchParams.get(GRAPHIQL_QUERY_KEY) !== graphiql_query && graphiql_query != undefined) {
+				newUrl.searchParams.set(GRAPHIQL_QUERY_KEY, graphiql_query);
+			}
+
+			if (newUrl.searchParams.get(GRAPHIQL_VARIABLES_KEY) !== graphiql_variables && graphiql_variables != undefined) {
+				newUrl.searchParams.set(GRAPHIQL_VARIABLES_KEY, graphiql_variables);
 			}
 
 			goto(newUrl, {
