@@ -63,12 +63,24 @@
 <svelte:element this={as} bind:this={resizeEl} class={classNames('resizable', className)}>
 	<slot />
 	{#if horizontal}
-		<div class="material-icons resizer resize-r" on:mousedown={mouseDownHandler}>
+		<div
+			class="material-icons resizer resize-r"
+			on:mousedown={mouseDownHandler}
+			role="separator"
+			aria-orientation="horizontal"
+		>
 			drag_indicator
 		</div>
 	{/if}
 	{#if vertical}
-		<div class="resizer resize-b" on:mousedown={mouseDownHandler}>drag_handle</div>
+		<div
+			class="resizer resize-b"
+			on:mousedown={mouseDownHandler}
+			role="separator"
+			aria-orientation="vertical"
+		>
+			drag_handle
+		</div>
 	{/if}
 </svelte:element>
 
