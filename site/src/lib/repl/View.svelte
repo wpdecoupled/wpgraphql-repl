@@ -6,27 +6,27 @@
 	import ReplMobileMenu from '$lib/control/FloatingMenu.svelte';
 	import PlaygroundMobileConfig from '$lib/config/DialogView.svelte';
 
-	$: ({ url, wp_version, php_version } = $repl_state);
+	$: ({ url, wp, php } = $repl_state);
 
 	function handleNewUrl(event: CustomEvent<string>) {
 		repl_state.dispatch({
 			type: 'set-url',
-			value: event.detail
-		})
+			value: event.detail,
+		});
 	}
 
 	function handleNewClient(event: CustomEvent<PlaygroundClient>) {
 		repl_state.dispatch({
 			type: 'set-client',
-			value: event.detail
-		})
+			value: event.detail,
+		});
 	}
 
 	function handleNewGraphiQLContext(event: CustomEvent<{ query: string; variables: string }>) {
 		repl_state.dispatch({
 			type: 'set-graphiql-context',
-			value: event.detail
-		})
+			value: event.detail,
+		});
 	}
 </script>
 
@@ -49,7 +49,14 @@
 	</PlaygroundSidebarConfig>
 
 	<section id="playground">
-		<Playground on:newGraphiQLContext={handleNewGraphiQLContext} on:newUrl={handleNewUrl} on:newClient={handleNewClient} wpVersion={wp_version} phpVersion={php_version} initialUrl={url} />
+		<Playground
+			on:newGraphiQLContext={handleNewGraphiQLContext}
+			on:newUrl={handleNewUrl}
+			on:newClient={handleNewClient}
+			wpVersion={wp}
+			phpVersion={php}
+			initialUrl={url}
+		/>
 	</section>
 </main>
 <PlaygroundMobileConfig />

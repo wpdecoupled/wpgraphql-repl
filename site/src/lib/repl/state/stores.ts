@@ -28,19 +28,19 @@ function createStore<T>(reducer: StoreReducer<T>, initialState: T) {
 
 export type ReplStateValue = {
 	client: PlaygroundClient | null;
-	name: string;
-	url: string;
-	wp_version: SupportedWordPressVersions;
-	php_version: SupportedPHPVersions;
-	graphiql_query?: string;
-	graphiql_variables?: string;
+	[REPL_NAME_KEY]: string;
+	[PLAYGROUND_URL_KEY]: string;
+	[PLAYGROUND_WP_VERSION_KEY]: SupportedWordPressVersions;
+	[PLAYGROUND_PHP_VERSION_KEY]: SupportedPHPVersions;
+	[GRAPHIQL_QUERY_KEY]?: string;
+	[GRAPHIQL_VARIABLES_KEY]?: string;
 };
 
 const default_repl_state: ReplStateValue = {
 	client: null,
 	url: PLAYGROUND_URL_DEFAULT,
-	wp_version: PLAYGROUND_WP_DEFAULT,
-	php_version: PLAYGROUND_PHP_DEFAULT,
+	wp: PLAYGROUND_WP_DEFAULT,
+	php: PLAYGROUND_PHP_DEFAULT,
 	name: REPL_NAME_DEFAULT,
 };
 
@@ -51,26 +51,21 @@ const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 		case 'load_state':
 			return {
 				...state,
-				url: action?.value[PLAYGROUND_URL_KEY],
-				wp_version: action?.value[PLAYGROUND_WP_VERSION_KEY],
-				php_version: action?.value[PLAYGROUND_PHP_VERSION_KEY],
-				name: action?.value[REPL_NAME_KEY],
-				query: action?.value[GRAPHIQL_QUERY_KEY],
-				variables: action?.value[GRAPHIQL_VARIABLES_KEY],
+				...action.value,
 			};
 		case 'set-url':
 			return { ...state, url: action?.value };
 		case 'set-wp-version':
-			return { ...state, wp_version: action?.value };
+			return { ...state, wp: action?.value };
 		case 'set-php-version':
-			return { ...state, php_version: action?.value };
+			return { ...state, php: action?.value };
 		case 'update-name':
 			return { ...state, name: action?.value };
 		case 'set-graphiql-context':
 			return {
 				...state,
-				graphiql_query: action?.value.query,
-				graphiql_variables: action?.value.variables,
+				query: action?.value.query,
+				variables: action?.value.variables,
 			};
 		default:
 			return state;

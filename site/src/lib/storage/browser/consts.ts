@@ -1,6 +1,6 @@
 import type { ValidStorageKey } from './types';
 
-export const PLAYGROUND_URL_KEY = 'playground_url';
+export const PLAYGROUND_URL_KEY = 'url';
 export const PLAYGROUND_WP_VERSION_KEY = 'wp';
 export const PLAYGROUND_PHP_VERSION_KEY = 'php';
 export const REPL_NAME_KEY = 'name';

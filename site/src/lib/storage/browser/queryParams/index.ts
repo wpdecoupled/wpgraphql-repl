@@ -37,19 +37,19 @@ const queryParamsProvider: StorageProvider = {
 		};
 	},
 	updateStorageFromState: (page, state) => {
-		const { url, name, wp_version, php_version, graphiql_query, graphiql_variables } = state;
+		const { url, name, wp, php, query, variables } = state;
 
 		if (browser) {
 			const newUrl = new URL(page.url);
 			let addHistory = false;
 
-			if (newUrl.searchParams.get(PLAYGROUND_WP_VERSION_KEY) !== wp_version) {
-				newUrl.searchParams.set(PLAYGROUND_WP_VERSION_KEY, wp_version);
+			if (newUrl.searchParams.get(PLAYGROUND_WP_VERSION_KEY) !== wp) {
+				newUrl.searchParams.set(PLAYGROUND_WP_VERSION_KEY, wp);
 				addHistory = true;
 			}
 
-			if (newUrl.searchParams.get(PLAYGROUND_PHP_VERSION_KEY) !== php_version) {
-				newUrl.searchParams.set(PLAYGROUND_PHP_VERSION_KEY, php_version);
+			if (newUrl.searchParams.get(PLAYGROUND_PHP_VERSION_KEY) !== php) {
+				newUrl.searchParams.set(PLAYGROUND_PHP_VERSION_KEY, php);
 				addHistory = true;
 			}
 
@@ -61,12 +61,12 @@ const queryParamsProvider: StorageProvider = {
 				newUrl.searchParams.set(REPL_NAME_KEY, name);
 			}
 
-			if (newUrl.searchParams.get(GRAPHIQL_QUERY_KEY) !== graphiql_query && graphiql_query != undefined) {
-				newUrl.searchParams.set(GRAPHIQL_QUERY_KEY, graphiql_query);
+			if (newUrl.searchParams.get(GRAPHIQL_QUERY_KEY) !== query && query != undefined) {
+				newUrl.searchParams.set(GRAPHIQL_QUERY_KEY, query);
 			}
 
-			if (newUrl.searchParams.get(GRAPHIQL_VARIABLES_KEY) !== graphiql_variables && graphiql_variables != undefined) {
-				newUrl.searchParams.set(GRAPHIQL_VARIABLES_KEY, graphiql_variables);
+			if (newUrl.searchParams.get(GRAPHIQL_VARIABLES_KEY) !== variables && variables != undefined) {
+				newUrl.searchParams.set(GRAPHIQL_VARIABLES_KEY, variables);
 			}
 
 			goto(newUrl, {
