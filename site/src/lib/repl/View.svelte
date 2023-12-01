@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Playground, type PlaygroundClient } from 'wpgraphql-playground';
-	import { repl_state } from '$lib/repl/state';
+	import { repl_state, createGraphiQLUrl } from '$lib/repl/state';
 	import PlaygroundSidebarConfig from '$lib/config/SidebarView.svelte';
 	import { Header, Footer } from '$lib/control/panels';
 	import ReplMobileMenu from '$lib/control/FloatingMenu.svelte';
@@ -50,14 +50,15 @@
 
 	<section id="playground">
 		<Playground
-			on:newGraphiQLContext={handleNewGraphiQLContext}
-			on:newUrl={handleNewUrl}
-			on:newClient={handleNewClient}
-			wpVersion={wp}
-			phpVersion={php}
-			initialUrl={url}
+		on:newGraphiQLContext={handleNewGraphiQLContext}
+		on:newUrl={handleNewUrl}
+		on:newClient={handleNewClient}
+		wpVersion={wp}
+		phpVersion={php}
+		initialUrl={createGraphiQLUrl($repl_state)}
 		/>
-	</section>
+		<!-- @TODO: Fix Line 58 so we don't have to rememer to provess the URL special like-->
+	</section>so
 </main>
 <PlaygroundMobileConfig />
 <ReplMobileMenu />

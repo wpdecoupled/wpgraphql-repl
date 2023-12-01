@@ -44,6 +44,18 @@ const default_repl_state: ReplStateValue = {
 	name: REPL_NAME_DEFAULT,
 };
 
+//TODO: Replace this with something sensible
+export function createGraphiQLUrl(state: ReplStateValue) {
+	const url = new URL(state.url, "https://fake.com");
+	if(url.searchParams.has('page') && url.searchParams.get('page') === 'graphiql-ide' && url.searchParams.has('query')) {
+		state.query && url.searchParams.set('query', state.query);
+
+		return url.pathname + url.search;
+	}
+
+	return state.url;
+}
+
 const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 	switch (action.type) {
 		case 'set-client':
@@ -54,7 +66,12 @@ const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 				...action.value,
 			};
 		case 'set-url':
-			return { ...state, url: action?.value };
+			const new_state = { ...state, url: action?.value };
+
+			if (state.client) {
+				state.client.goTo(createGraphiQLUrl(new_state));
+			}
+			return new_state;
 		case 'set-wp-version':
 			return { ...state, wp: action?.value };
 		case 'set-php-version':
@@ -64,8 +81,8 @@ const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 		case 'set-graphiql-context':
 			return {
 				...state,
-				query: action?.value.query,
-				variables: action?.value.variables,
+				query: action?.value.query?.replace(/\s/g, ""),
+				variables: action?.value.variables?.replace(/\s/g, ""),
 			};
 		default:
 			return state;
