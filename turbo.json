@@ -20,6 +20,11 @@
 				"dist"
 			]
 		},
+		"wpgraphql-plugin-repl#build": {
+			"outputs": [
+				"dist"
+			]
+		},
 		"prepare": {
 			"outputs": [
 				"static/smui.css"

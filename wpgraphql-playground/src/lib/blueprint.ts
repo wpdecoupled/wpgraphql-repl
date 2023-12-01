@@ -38,6 +38,18 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 					}
 				},
 				{
+					step: 'installPlugin',
+					pluginZipFile: {
+						resource: 'url',
+						url: '/wpgraphql-plugin-repl.zip'
+					}
+				},
+				{
+					step: 'writeFile',
+					path: '/wordpress/debug.php',
+					data: phpDebug
+				},
+				{
 					step: 'writeFile',
 					path: '/wordpress/debug.php',
 					data: phpDebug
