@@ -4,14 +4,14 @@
 	import Card from '@smui/card';
 
 	import * as toast from '$lib/utils/toast';
-	import { replState } from '$lib/repl/state';
+	import { repl_state } from '$lib/repl/state';
 
-	$: ({ wpUrl, client } = $replState);
+	$: ({ url, client } = $repl_state);
 
 	$: hasClient = Boolean(client);
 
 	// We don't want the URL to update till after the user has finished typing and pressed enter to trigger the navigation.
-	$: workingUrl = wpUrl;
+	$: workingUrl = url;
 </script>
 
 <Card padded>

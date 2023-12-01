@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { replState } from '$lib/repl/state';
+	import { repl_state } from '$lib/repl/state';
 
-	$: ({ name } = $replState);
+	$: ({ name } = $repl_state);
 
 	$: title = `${name} • REPL • WPGraphQL`;
 	const description = `A REPL for WPGraphQL from the comfort of your browser`;

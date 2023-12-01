@@ -4,7 +4,7 @@
 	import { getKey } from './stores/actions';
 	import { PLAYGROUND_WP_DEFAULT, PLAYGROUND_PHP_DEFAULT, PLAYGROUND_URL_DEFAULT } from './consts';
 	import type { SupportedWordPressVersions, SupportedPHPVersions } from './types';
-	import { wpUrl } from './stores';
+	import { wpUrl, client } from './stores';
 
 	// export let config: Partial<PlaygroundConfig>;
 
@@ -15,6 +15,7 @@
 	export let initialUrl: string = PLAYGROUND_URL_DEFAULT;
 
 	$: dispatch('newUrl', $wpUrl);
+	$: dispatch('newClient', $client)
 
 	$: key = getKey(wpVersion, phpVersion);
 </script>

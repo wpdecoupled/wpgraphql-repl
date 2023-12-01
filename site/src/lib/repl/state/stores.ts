@@ -1,6 +1,5 @@
-import { writable, derived } from 'svelte/store';
-import { client } from 'wpgraphql-playground';
-
+import { writable, get } from 'svelte/store';
+import type { PlaygroundClient } from 'wpgraphql-playground';
 import {
 	PLAYGROUND_PHP_DEFAULT,
 	PLAYGROUND_URL_DEFAULT,
@@ -10,33 +9,48 @@ import {
 
 import type { SupportedPHPVersions, SupportedWordPressVersions } from 'wpgraphql-playground';
 
-export const wpUrl = writable<string>(PLAYGROUND_URL_DEFAULT);
-export const wpVersion = writable<SupportedWordPressVersions>(PLAYGROUND_WP_DEFAULT);
-export const phpVersion = writable<SupportedPHPVersions>(PLAYGROUND_PHP_DEFAULT);
-export const name = writable<string>(REPL_NAME_DEFAULT);
+type StoreAction = { type: string, value?: any };
+type StoreReducer<S> = (state: S, action: StoreAction) => S;
 
-export const replState = derived<
-	[typeof wpUrl, typeof wpVersion, typeof phpVersion, typeof name, typeof client],
-	ReplStateValue
->(
-	[wpUrl, wpVersion, phpVersion, name, client],
-	([$wpUrl, $wpVersion, $phpVersion, $name, $client]) => {
-		return {
-			client: $client,
-			name: $name,
-			wpUrl: $wpUrl,
-			wpVersion: $wpVersion,
-			phpVersion: $phpVersion,
-		};
-	}
-);
+function createStore<T>(reducer: StoreReducer<T>, initialState: T) {
+	const { subscribe, update } = writable(initialState);
+	const dispatch = (action: StoreAction) => update((state) => reducer(state, action));
+	return { subscribe, dispatch };
+}
 
 export type ReplStateValue = {
-	client: typeof client | null;
+	client: PlaygroundClient | null;
 	name: string;
-	wpUrl: string;
-	wpVersion: SupportedWordPressVersions;
-	phpVersion: SupportedPHPVersions;
+	url: string;
+	wp_version: SupportedWordPressVersions;
+	php_version: SupportedPHPVersions;
 };
 
-export type ReplState = typeof replState;
+const default_repl_state: ReplStateValue = {
+	client: null,
+	url: PLAYGROUND_URL_DEFAULT,
+	wp_version: PLAYGROUND_WP_DEFAULT,
+	php_version: PLAYGROUND_PHP_DEFAULT,
+	name: REPL_NAME_DEFAULT,
+};
+
+const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
+	switch (action.type) {
+		case 'set-client':
+			return { ...state, client: action?.value };
+		case 'load_state':
+			return {...state, ...action.value }
+		case 'set-url':
+			return { ...state, url: action?.value };
+		case 'set-wp-version':
+			return { ...state, wp_version: action?.value };
+		case 'set-php-version':
+			return { ...state, php_version: action?.value };
+		case 'update-name':
+			return { ...state, name: action?.value };
+		default:
+			return state;
+	}
+};
+
+export const repl_state = createStore(repl_reducer, default_repl_state);

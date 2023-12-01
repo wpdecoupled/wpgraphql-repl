@@ -5,7 +5,7 @@
 
 	import { page } from '$app/stores';
 	import { dev } from '$app/environment';
-	import { loadState } from '$lib/repl/state';
+	import { repl_state } from '$lib/repl/state';
 
 	import { Seo } from '$lib/seo';
 	import { ConfigToastProvider } from '$lib/config/components';
@@ -14,12 +14,14 @@
 
 	inject({ mode: dev ? 'development' : 'production' });
 
-	$: if($page.data?.state) {
-		loadState($page.data?.state);
+	$: if ($page.data?.state) {
+		repl_state.dispatch({
+			type: 'load_state',
+			value: $page.data?.state,
+		});
 	} else {
-		throw error(500, 'No state found in page data')
+		throw error(500, 'No state found in page data');
 	}
-
 </script>
 
 <ConfigToastProvider />

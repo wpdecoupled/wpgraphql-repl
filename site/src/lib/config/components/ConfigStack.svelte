@@ -2,22 +2,28 @@
 	import { Panel, Header, Content } from '@smui-extra/accordion';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import Select, { Option } from '@smui/select';
-	import { replState, setWordPressVersion, setPHPVersion } from '$lib/repl/state';
+	import { repl_state } from '$lib/repl/state';
 
 	import { SupportedWordPressVersionsList, SupportedPHPVersionsList } from 'wpgraphql-playground';
 
 	let stackPanel = false;
 
-	let wpVersion = $replState.wpVersion;
-	let phpVersion = $replState.phpVersion;
-	$: hasClient = Boolean($replState.client);
+	let wpVersion = $repl_state.wp_version;
+	let phpVersion = $repl_state.php_version;
+	$: hasClient = Boolean($repl_state.client);
 
 	$: {
-		setPHPVersion(phpVersion);
+		repl_state.dispatch({
+			type: 'set-php-version',
+			value: phpVersion
+		});
 	}
 
 	$: {
-		setWordPressVersion(wpVersion);
+		repl_state.dispatch({
+			type: 'set-wp-version',
+			value: wpVersion
+		});
 	}
 </script>
 

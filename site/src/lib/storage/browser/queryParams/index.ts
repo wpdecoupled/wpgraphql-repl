@@ -3,9 +3,9 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 
-import type { StateFromLoad } from '$lib/repl/state';
 
 import type { StorageProvider } from '../types';
+
 import {
 	isValidStorageKey,
 	PLAYGROUND_PHP_VERSION_KEY,
@@ -13,6 +13,13 @@ import {
 	PLAYGROUND_WP_VERSION_KEY,
 	REPL_NAME_KEY,
 } from '../consts';
+
+type StateFromLoad = {
+	[PLAYGROUND_PHP_VERSION_KEY]?: string;
+	[PLAYGROUND_URL_KEY]?: string;
+	[PLAYGROUND_WP_VERSION_KEY]?: string;
+	[REPL_NAME_KEY]?: string;
+}
 
 const queryParamsProvider: StorageProvider = {
 	routeHandler: ({ url }) => {
@@ -29,24 +36,24 @@ const queryParamsProvider: StorageProvider = {
 		};
 	},
 	updateStorageFromState: (page, state) => {
-		const { wpUrl, name, wpVersion, phpVersion } = state;
+		const { url, name, wp_version, php_version } = state;
 
 		if (browser) {
 			const newUrl = new URL(page.url);
 			let addHistory = false;
 
-			if (newUrl.searchParams.get(PLAYGROUND_WP_VERSION_KEY) !== wpVersion) {
-				newUrl.searchParams.set(PLAYGROUND_WP_VERSION_KEY, wpVersion);
+			if (newUrl.searchParams.get(PLAYGROUND_WP_VERSION_KEY) !== wp_version) {
+				newUrl.searchParams.set(PLAYGROUND_WP_VERSION_KEY, wp_version);
 				addHistory = true;
 			}
 
-			if (newUrl.searchParams.get(PLAYGROUND_PHP_VERSION_KEY) !== phpVersion) {
-				newUrl.searchParams.set(PLAYGROUND_PHP_VERSION_KEY, phpVersion);
+			if (newUrl.searchParams.get(PLAYGROUND_PHP_VERSION_KEY) !== php_version) {
+				newUrl.searchParams.set(PLAYGROUND_PHP_VERSION_KEY, php_version);
 				addHistory = true;
 			}
 
-			if (newUrl.searchParams.get(PLAYGROUND_URL_KEY) !== wpUrl) {
-				newUrl.searchParams.set(PLAYGROUND_URL_KEY, wpUrl);
+			if (newUrl.searchParams.get(PLAYGROUND_URL_KEY) !== url) {
+				newUrl.searchParams.set(PLAYGROUND_URL_KEY, url);
 			}
 
 			if (newUrl.searchParams.get(REPL_NAME_KEY) !== name) {
