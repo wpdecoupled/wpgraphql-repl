@@ -8,6 +8,14 @@ import {
 } from './consts';
 
 import type { SupportedPHPVersions, SupportedWordPressVersions } from 'wpgraphql-playground';
+import {
+	GRAPHIQL_QUERY_KEY,
+	GRAPHIQL_VARIABLES_KEY,
+	PLAYGROUND_PHP_VERSION_KEY,
+	PLAYGROUND_URL_KEY,
+	PLAYGROUND_WP_VERSION_KEY,
+	REPL_NAME_KEY,
+} from '$lib/storage/browser';
 
 type StoreAction = { type: string; value?: any };
 type StoreReducer<S> = (state: S, action: StoreAction) => S;
@@ -41,7 +49,15 @@ const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 		case 'set-client':
 			return { ...state, client: action?.value };
 		case 'load_state':
-			return { ...state, ...action.value };
+			return {
+				...state,
+				url: action?.value[PLAYGROUND_URL_KEY],
+				wp_version: action?.value[PLAYGROUND_WP_VERSION_KEY],
+				php_version: action?.value[PLAYGROUND_PHP_VERSION_KEY],
+				name: action?.value[REPL_NAME_KEY],
+				query: action?.value[GRAPHIQL_QUERY_KEY],
+				variables: action?.value[GRAPHIQL_VARIABLES_KEY],
+			};
 		case 'set-url':
 			return { ...state, url: action?.value };
 		case 'set-wp-version':
