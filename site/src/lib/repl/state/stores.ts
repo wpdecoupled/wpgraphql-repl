@@ -9,7 +9,7 @@ import {
 
 import type { SupportedPHPVersions, SupportedWordPressVersions } from 'wpgraphql-playground';
 
-type StoreAction = { type: string, value?: any };
+type StoreAction = { type: string; value?: any };
 type StoreReducer<S> = (state: S, action: StoreAction) => S;
 
 function createStore<T>(reducer: StoreReducer<T>, initialState: T) {
@@ -39,7 +39,7 @@ const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 		case 'set-client':
 			return { ...state, client: action?.value };
 		case 'load_state':
-			return {...state, ...action.value }
+			return { ...state, ...action.value };
 		case 'set-url':
 			return { ...state, url: action?.value };
 		case 'set-wp-version':

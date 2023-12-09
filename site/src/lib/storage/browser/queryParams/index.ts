@@ -3,7 +3,6 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 
-
 import type { StorageProvider } from '../types';
 
 import {
@@ -19,7 +18,7 @@ type StateFromLoad = {
 	[PLAYGROUND_URL_KEY]?: string;
 	[PLAYGROUND_WP_VERSION_KEY]?: string;
 	[REPL_NAME_KEY]?: string;
-}
+};
 
 const queryParamsProvider: StorageProvider = {
 	routeHandler: ({ url }) => {

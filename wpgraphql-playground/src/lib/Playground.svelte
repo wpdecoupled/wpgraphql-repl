@@ -15,7 +15,7 @@
 	export let initialUrl: string = PLAYGROUND_URL_DEFAULT;
 
 	$: dispatch('newUrl', $wpUrl);
-	$: dispatch('newClient', $client)
+	$: dispatch('newClient', $client);
 
 	$: key = getKey(wpVersion, phpVersion);
 </script>

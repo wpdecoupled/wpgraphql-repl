@@ -11,15 +11,15 @@
 	function handleNewUrl(event: CustomEvent<string>) {
 		repl_state.dispatch({
 			type: 'set-url',
-			value: event.detail
-		})
+			value: event.detail,
+		});
 	}
 
 	function handleNewClient(event: CustomEvent<PlaygroundClient>) {
 		repl_state.dispatch({
 			type: 'set-client',
-			value: event.detail
-		})
+			value: event.detail,
+		});
 	}
 </script>
 
@@ -42,7 +42,13 @@
 	</PlaygroundSidebarConfig>
 
 	<section id="playground">
-		<Playground on:newUrl={handleNewUrl} on:newClient={handleNewClient} wpVersion={wp_version} phpVersion={php_version} initialUrl={url} />
+		<Playground
+			on:newUrl={handleNewUrl}
+			on:newClient={handleNewClient}
+			wpVersion={wp_version}
+			phpVersion={php_version}
+			initialUrl={url}
+		/>
 	</section>
 </main>
 <PlaygroundMobileConfig />

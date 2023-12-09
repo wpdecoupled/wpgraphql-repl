@@ -15,14 +15,14 @@
 	$: {
 		repl_state.dispatch({
 			type: 'set-php-version',
-			value: phpVersion
+			value: phpVersion,
 		});
 	}
 
 	$: {
 		repl_state.dispatch({
 			type: 'set-wp-version',
-			value: wpVersion
+			value: wpVersion,
 		});
 	}
 </script>
@@ -37,12 +37,24 @@
 	</Header>
 	<Content>
 		<div class="select-stack">
-			<Select class="stack-item" variant="filled" bind:value={wpVersion} label="WordPress Version" disabled={!hasClient}>
+			<Select
+				class="stack-item"
+				variant="filled"
+				bind:value={wpVersion}
+				label="WordPress Version"
+				disabled={!hasClient}
+			>
 				{#each SupportedWordPressVersionsList as version}
 					<Option value={version}>{version}</Option>
 				{/each}
 			</Select>
-			<Select class="stack-item" variant="filled" bind:value={phpVersion} label="PHP Version" disabled={!hasClient}>
+			<Select
+				class="stack-item"
+				variant="filled"
+				bind:value={phpVersion}
+				label="PHP Version"
+				disabled={!hasClient}
+			>
 				{#each SupportedPHPVersionsList as version}
 					<Option value={version}>{version}</Option>
 				{/each}
