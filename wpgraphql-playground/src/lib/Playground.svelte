@@ -5,7 +5,6 @@
 	import { PLAYGROUND_WP_DEFAULT, PLAYGROUND_PHP_DEFAULT, PLAYGROUND_URL_DEFAULT } from './consts';
 	import type { SupportedWordPressVersions, SupportedPHPVersions } from './types';
 	import { wpUrl, client } from './stores';
-	import { browser } from '$app/environment';
 
 	// export let config: Partial<PlaygroundConfig>;
 
@@ -18,7 +17,7 @@
 	$: dispatch('newUrl', $wpUrl);
 	$: dispatch('newClient', $client);
 
-	if (browser) {
+	if (typeof window !== 'undefined') {
 		window.addEventListener('message', (message) => {
 			if (message?.data?.type === 'relay' && message?.data?.name === 'graphiql-context') {
 				const { query, variables } = message?.data?.data;
