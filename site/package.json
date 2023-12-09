@@ -30,7 +30,7 @@
 	"type": "module",
 	"dependencies": {
 		"@resvg/resvg-js": "^2.4.1",
-		"@sentry/sveltekit": "^7.56.0",
+		"@sentry/sveltekit": "^7.84.0",
 		"@smui-extra/accordion": "7.0.0-beta.15",
 		"@smui/card": "7.0.0-beta.15",
 		"@smui/dialog": "^7.0.0-beta.9",
@@ -56,5 +56,8 @@
 		"smui-theme": "7.0.0-beta.15",
 		"svelte": "^4.0.0",
 		"wpgraphql-playground": "*"
-	}
+	},
+	"resolutions": {
+    "@sentry/cli": "2.2.2"
+  }
 }
