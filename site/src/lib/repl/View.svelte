@@ -58,7 +58,7 @@
 		initialUrl={createGraphiQLUrl($repl_state)}
 		/>
 		<!-- @TODO: Fix Line 58 so we don't have to rememer to provess the URL special like-->
-	</section>so
+	</section>
 </main>
 <PlaygroundMobileConfig />
 <ReplMobileMenu />
