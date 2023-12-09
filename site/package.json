@@ -6,11 +6,12 @@
 		"dev": "vite dev --host 127.0.0.1",
 		"build": "vite build",
 		"preview": "vite preview",
+		"copy:plugin": "cp ../wpgraphql-plugin-repl/dist/wpgraphql-plugin-repl.zip static/wpgraphql-plugin-repl.zip",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "eslint . --fix",
 		"format": "prettier --write .",
-		"prepare": "yarn smui-theme",
+		"prepare": "yarn smui-theme && yarn copy:plugin",
 		"smui-theme": "smui-theme compile static/smui.css -i src/theme"
 	},
 	"devDependencies": {
