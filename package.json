@@ -13,5 +13,8 @@
 	},
 	"devDependencies": {
 		"turbo": "^1.11.1"
-	}
+	},
+	"resolutions": {
+    "@sentry/cli": "2.22.2"
+  }
 }

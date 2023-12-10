@@ -46,8 +46,12 @@ const default_repl_state: ReplStateValue = {
 
 //TODO: Replace this with something sensible
 export function createGraphiQLUrl(state: ReplStateValue) {
-	const url = new URL(state.url, "https://fake.com");
-	if(url.searchParams.has('page') && url.searchParams.get('page') === 'graphiql-ide' && url.searchParams.has('query')) {
+	const url = new URL(state.url, 'https://fake.com');
+	if (
+		url.searchParams.has('page') &&
+		url.searchParams.get('page') === 'graphiql-ide' &&
+		url.searchParams.has('query')
+	) {
 		state.query && url.searchParams.set('query', state.query);
 
 		return url.pathname + url.search;
@@ -61,10 +65,7 @@ const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 		case 'set-client':
 			return { ...state, client: action?.value };
 		case 'load_state':
-			return {
-				...state,
-				...action.value,
-			};
+			return { ...state, ...action.value };
 		case 'set-url':
 			const new_state = { ...state, url: action?.value };
 
@@ -81,8 +82,8 @@ const repl_reducer: StoreReducer<ReplStateValue> = (state, action) => {
 		case 'set-graphiql-context':
 			return {
 				...state,
-				query: action?.value.query?.replace(/\s/g, ""),
-				variables: action?.value.variables?.replace(/\s/g, ""),
+				query: action?.value.query?.replace(/\s/g, ''),
+				variables: action?.value.variables?.replace(/\s/g, ''),
 			};
 		default:
 			return state;

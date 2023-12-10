@@ -7,7 +7,6 @@ export const REPL_NAME_KEY = 'name';
 export const GRAPHIQL_QUERY_KEY = 'query';
 export const GRAPHIQL_VARIABLES_KEY = 'variables';
 
-
 export const ValidStorageKeys = [
 	PLAYGROUND_PHP_VERSION_KEY,
 	PLAYGROUND_URL_KEY,

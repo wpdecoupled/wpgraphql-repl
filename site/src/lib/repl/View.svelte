@@ -50,14 +50,22 @@
 
 	<section id="playground">
 		<Playground
-		on:newGraphiQLContext={handleNewGraphiQLContext}
-		on:newUrl={handleNewUrl}
-		on:newClient={handleNewClient}
-		wpVersion={wp}
-		phpVersion={php}
-		initialUrl={createGraphiQLUrl($repl_state)}
+			<<<<<<<
+			HEAD
+			on:newGraphiQLContext={handleNewGraphiQLContext}
+			on:newUrl={handleNewUrl}
+			on:newClient={handleNewClient}
+			wpVersion={wp}
+			phpVersion={php}
+			initialUrl={createGraphiQLUrl($repl_state)}
 		/>
 		<!-- @TODO: Fix Line 58 so we don't have to rememer to provess the URL special like-->
+		======= on:newUrl={handleNewUrl}
+		on:newClient={handleNewClient}
+		wpVersion={wp_version}
+		phpVersion={php_version}
+		initialUrl={url}
+		/> >>>>>>> main
 	</section>
 </main>
 <PlaygroundMobileConfig />

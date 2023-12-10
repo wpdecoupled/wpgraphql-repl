@@ -16,15 +16,14 @@
 	export let initialUrl: string = PLAYGROUND_URL_DEFAULT;
 
 	$: dispatch('newUrl', $wpUrl);
-	$: dispatch('newClient', $client)
-
+	$: dispatch('newClient', $client);
 
 	if (browser) {
 		window.addEventListener('message', (message) => {
 			if (message?.data?.type === 'relay' && message?.data?.name === 'graphiql-context') {
-				const { query, variables } = message?.data?.data
+				const { query, variables } = message?.data?.data;
 
-				dispatch('newGraphiQLContext', { query, variables })
+				dispatch('newGraphiQLContext', { query, variables });
 			}
 		});
 	}
