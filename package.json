@@ -11,6 +11,9 @@
 		"format": "turbo run format"
 	},
 	"devDependencies": {
-		"turbo": "^1.10.6"
-	}
+		"turbo": "^1.11.1"
+	},
+	"resolutions": {
+    "@sentry/cli": "2.22.2"
+  }
 }
