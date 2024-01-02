@@ -17,6 +17,16 @@
 	$: dispatch('newUrl', $wpUrl);
 	$: dispatch('newClient', $client);
 
+	if (typeof window !== 'undefined') {
+		window.addEventListener('message', (message) => {
+			if (message?.data?.type === 'relay' && message?.data?.name === 'graphiql-context') {
+				const { query, variables } = message?.data?.data;
+
+				dispatch('newGraphiQLContext', { query, variables });
+			}
+		});
+	}
+
 	$: key = getKey(wpVersion, phpVersion);
 </script>
 

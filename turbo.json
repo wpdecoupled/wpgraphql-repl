@@ -15,7 +15,17 @@
 				".vercel/**"
 			]
 		},
+		"wpgraphql-playground#prepare": {
+			"dependsOn": [
+				"wpgraphql-plugin-repl#build"
+			]
+		},
 		"wpgraphql-playground#build": {
+			"outputs": [
+				"dist"
+			]
+		},
+		"wpgraphql-plugin-repl#build": {
 			"outputs": [
 				"dist"
 			]
@@ -28,6 +38,9 @@
 		"lint": {},
 		"format": {},
 		"dev": {
+			"dependsOn": [
+				"prepare"
+			],
 			"cache": false,
 			"persistent": true
 		}

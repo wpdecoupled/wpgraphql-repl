@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { Playground, type PlaygroundClient } from 'wpgraphql-playground';
-	import { repl_state } from '$lib/repl/state';
+	import { repl_state, createGraphiQLUrl } from '$lib/repl/state';
 	import PlaygroundSidebarConfig from '$lib/config/SidebarView.svelte';
 	import { Header, Footer } from '$lib/control/panels';
 	import ReplMobileMenu from '$lib/control/FloatingMenu.svelte';
 	import PlaygroundMobileConfig from '$lib/config/DialogView.svelte';
 
-	$: ({ url, wp_version, php_version } = $repl_state);
+	$: ({ url, wp, php } = $repl_state);
 
 	function handleNewUrl(event: CustomEvent<string>) {
 		repl_state.dispatch({
@@ -18,6 +18,13 @@
 	function handleNewClient(event: CustomEvent<PlaygroundClient>) {
 		repl_state.dispatch({
 			type: 'set-client',
+			value: event.detail,
+		});
+	}
+
+	function handleNewGraphiQLContext(event: CustomEvent<{ query: string; variables: string }>) {
+		repl_state.dispatch({
+			type: 'set-graphiql-context',
 			value: event.detail,
 		});
 	}
@@ -43,12 +50,15 @@
 
 	<section id="playground">
 		<Playground
+			on:newGraphiQLContext={handleNewGraphiQLContext}
 			on:newUrl={handleNewUrl}
 			on:newClient={handleNewClient}
-			wpVersion={wp_version}
-			phpVersion={php_version}
-			initialUrl={url}
+			wpVersion={wp}
+			phpVersion={php}
+			initialUrl={createGraphiQLUrl($repl_state)}
 		/>
+				<!-- @TODO: Fix Line 58 so we don't have to rememer to provess the URL special like-->
+
 	</section>
 </main>
 <PlaygroundMobileConfig />

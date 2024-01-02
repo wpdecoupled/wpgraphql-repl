@@ -2,7 +2,8 @@
 	"private": true,
 	"workspaces": [
 		"site",
-		"wpgraphql-playground"
+		"wpgraphql-playground",
+		"wpgraphql-plugin-repl"
 	],
 	"scripts": {
 		"build": "turbo run build",

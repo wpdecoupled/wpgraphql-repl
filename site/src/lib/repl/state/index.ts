@@ -1,2 +1,2 @@
-export { type ReplStateValue, repl_state } from './stores';
+export { type ReplStateValue, repl_state, createGraphiQLUrl } from './stores';
 export * from './consts';

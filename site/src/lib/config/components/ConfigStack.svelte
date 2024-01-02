@@ -8,8 +8,8 @@
 
 	let stackPanel = false;
 
-	let wpVersion = $repl_state.wp_version;
-	let phpVersion = $repl_state.php_version;
+	let wpVersion = $repl_state.wp;
+	let phpVersion = $repl_state.php;
 	$: hasClient = Boolean($repl_state.client);
 
 	$: {

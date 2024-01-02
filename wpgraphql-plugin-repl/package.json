@@ -1,0 +1,10 @@
+{
+	"name": "wpgraphql-plugin-repl",
+	"version": "1.0.0",
+	"scripts": {
+		"build": "mkdir -p dist && cd src && bestzip ../dist/wpgraphql-plugin-repl.zip ./*"
+	},
+	"devDependencies": {
+		"bestzip": "^2.2.1"
+	}
+}

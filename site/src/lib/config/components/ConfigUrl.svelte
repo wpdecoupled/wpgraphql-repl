@@ -25,7 +25,10 @@
 			// @ts-expect-error - Svelte doesn't know about key for some reason
 			if (e.key === 'Enter') {
 				if (client !== null) {
-					client.goTo(workingUrl);
+					repl_state.dispatch({
+						type: 'set-url',
+						value: workingUrl,
+					});
 					toast.notify('Navigating to URL');
 				} else {
 					throw Error('Client is not ready');
