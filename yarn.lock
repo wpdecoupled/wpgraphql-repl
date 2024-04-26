@@ -825,7 +825,7 @@
   resolved "https://registry.yarnpkg.com/@sentry/cli-win32-x64/-/cli-win32-x64-2.22.2.tgz#bfb49183643532f442a2eb51a3ca5d051c0faf67"
   integrity sha512-Lv2RdLrkEBkWxozO9HsJgKKybTNGrocM8QMaumdSpd/goeN3Zut2nh7hYSM3Z1UWJmVnLirmOBxA8g6RRO9v1Q==
 
-"@sentry/cli@2.2.2", "@sentry/cli@^2.17.0":
+"@sentry/cli@2.22.2", "@sentry/cli@^2.17.0":
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/@sentry/cli/-/cli-2.22.2.tgz#ac142b66672d47b102e71b70e85a501a82f96714"
   integrity sha512-p3qShwT59GgKbaZ1Y49wxyE2ZTHc69PgBlaP2ilBOIdtntMkOhvd8YbGdQFlMzmWcLR2ybSj9cXqMi7wIUQL6A==
