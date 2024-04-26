@@ -20,7 +20,7 @@
 			value: $page.data?.state,
 		});
 	} else {
-		throw error(500, 'No state found in page data');
+		error(500, 'No state found in page data');
 	}
 </script>
 
