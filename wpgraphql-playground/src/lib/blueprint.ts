@@ -16,11 +16,6 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 			},
 			steps: [
 				{
-					step: 'login',
-					username: 'admin',
-					password: 'password'
-				},
-				{
 					step: 'installPlugin',
 					pluginZipFile: {
 						resource: 'wordpress.org/plugins',
@@ -41,7 +36,12 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 					step: 'writeFile',
 					path: '/wordpress/debug.php',
 					data: phpDebug
-				}
+				},
+				{
+					step: 'login',
+					username: 'admin',
+					password: 'password'
+				},
 			]
 		},
 		customBlueprint

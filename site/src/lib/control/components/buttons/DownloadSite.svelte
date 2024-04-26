@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { zipEntireSite } from '@wp-playground/client';
+	import { zipWpContent } from '@wp-playground/client';
 	import slugify from 'slugify';
 	import * as toast from '$lib/utils/toast';
 
@@ -16,16 +16,17 @@
 			duration: 2000,
 		});
 
-		const file = await zipEntireSite(client);
+		const file = await zipWpContent(client);
 		prepToast.update({ next: 0.75 });
 
-		const fileUrl = URL.createObjectURL(file);
-		const fileName = `${slugify(name)}.zip`;
+		console.log('file', file)
+
+		const fileUrl = URL.createObjectURL(new File([file], `${slugify(name)}.zip`));
+		// const fileName = `${slugify(name)}.zip`;
 		const a = document.createElement('a');
 		prepToast.complete({ msg: 'Downloading...' });
 
 		a.href = fileUrl;
-		a.download = fileName || 'download';
 
 		a.click();
 
