@@ -46,7 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@wp-playground/client": "^0.7.1",
+		"@wp-playground/client": "^1.0.3",
 		"just-extend": "^6.2.0"
 	}
 }
