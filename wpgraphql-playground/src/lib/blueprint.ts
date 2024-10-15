@@ -1,8 +1,6 @@
 import type { Blueprint } from '@wp-playground/client';
 import extend from 'just-extend';
 
-import phpDebug from './php/debug.php?raw';
-
 import { PLAYGROUND_WP_DEFAULT, PLAYGROUND_PHP_DEFAULT, PLAYGROUND_URL_DEFAULT } from './consts';
 
 export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blueprint {
