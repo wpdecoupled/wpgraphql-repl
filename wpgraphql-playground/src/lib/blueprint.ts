@@ -15,7 +15,7 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 			steps: [
 				{
 					step: 'installPlugin',
-					pluginZipFile: {
+					pluginData: {
 						resource: 'wordpress.org/plugins',
 						slug: 'wp-graphql'
 					},
@@ -25,7 +25,7 @@ export function makeWpGraphQLBlueprint(customBlueprint: Partial<Blueprint>): Blu
 				},
 				{
 					step: 'installPlugin',
-					pluginZipFile: {
+					pluginData: {
 						resource: 'wordpress.org/plugins',
 						slug: 'debug-info'
 					}
