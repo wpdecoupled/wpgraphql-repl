@@ -1,4 +1,3 @@
-import { handleErrorWithSentry, Replay } from '@sentry/sveltekit';
 import * as Sentry from '@sentry/sveltekit';
 
 Sentry.init({
@@ -14,8 +13,8 @@ Sentry.init({
 	replaysOnErrorSampleRate: 1.0,
 
 	// If you don't want to use Session Replay, just remove the line below:
-	integrations: [new Replay()],
+	integrations: [Sentry.replayIntegration()],
 });
 
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
-export const handleError = handleErrorWithSentry();
+export const handleError = Sentry.handleErrorWithSentry();

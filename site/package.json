@@ -31,8 +31,8 @@
 	"type": "module",
 	"dependencies": {
 		"@resvg/resvg-js": "^2.4.1",
-		"@sentry/cli": "2.31.0",
-		"@sentry/sveltekit": "^7.84.0",
+		"@sentry/cli": "^2.37.0",
+		"@sentry/sveltekit": "^8.34.0",
 		"@smui-extra/accordion": "7.0.0-beta.18",
 		"@smui/card": "7.0.0-beta.18",
 		"@smui/dialog": "^7.0.0-beta.9",
