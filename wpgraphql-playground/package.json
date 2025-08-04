@@ -27,7 +27,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.2.0",
-		"@sveltejs/kit": "^2.5.7",
+		"@sveltejs/kit": "^2.15.2",
 		"@sveltejs/package": "^2.1.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@typescript-eslint/eslint-plugin": "^8.9.0",
@@ -46,7 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@wp-playground/client": "^1.0.3",
+		"@wp-playground/client": "1.0.29",
 		"just-extend": "^6.2.0"
 	}
 }
